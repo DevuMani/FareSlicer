@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menu_home"
+            android:title="@string/menu_home"
+            android:icon="@drawable/menu_home_icon"/>
+        <item
+            android:id="@+id/menu_notification"
+            android:title="@string/menu_notification"
+            android:icon="@drawable/menu_notification_icon"/>
+        <item
+            android:id="@+id/menu_passcode"
+            android:title="@string/menu_passcode"
+            android:icon="@drawable/menu_passcode_icon"/>
+        <item
+            android:id="@+id/menu_rate"
+            android:title="@string/menu_rate_us"
+            android:icon="@drawable/menu_rate_icon"/>
+        <item
+            android:id="@+id/menu_contact"
+            android:title="@string/menu_contact_us"
+            android:icon="@drawable/menu_contact_icon"/>
+        <item
+            android:id="@+id/menu_log_out"
+            android:title="@string/menu_log_out"
+            android:icon="@drawable/menu_log_out_icon"/>
+    </group>
+
+</menu>

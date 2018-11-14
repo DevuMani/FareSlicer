@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">FareSlicer</string>
+
+    <!--Account kit-->
+
+    <string name="FACEBOOK_APP_ID">570771760026777</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">78dd7a421f95d41d353b68b97b697854</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_notification">Notification</string>
+    <string name="menu_passcode">Passcode</string>
+    <string name="menu_rate_us">Rate us</string>
+    <string name="menu_contact_us">Contact Us</string>
+    <string name="menu_log_out">Log Out</string>
+    <string name="navigation_drawer_open">Open Drawer</string>
+    <string name="navigation_drawer_close">Close Drawer</string>
+    <string name="tab_transaction">All transaction</string>
+    <string name="tab_groups">Groups</string>
+    <string name="no_transaction_found">No transaction found</string>
+    <string name="Rs">\u20B9</string>
+
+</resources>

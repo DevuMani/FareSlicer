@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6b0cef</color>
+    <color name="colorPrimaryDark">#4b00d6</color>
+    <color name="colorAccent">#D500F9</color>
+
+    <color name="white">#ffffff</color>
+    <color name="default_color">#0099E1</color>
+    <color name="reverb_dark">#262261</color>
+    <color name="text_hint">#e9e8ef</color>
+    <color name="Black">#000000</color>
+    <color name="colorPrimaryLight">#9455ED</color>
+
+</resources>

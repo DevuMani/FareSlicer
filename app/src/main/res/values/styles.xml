@@ -1,0 +1,47 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+    <style name="AppLoginTheme" parent="Theme.AccountKit">
+        <item name="colorPrimary">@color/colorPrimary</item>x
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <!--&lt;!&ndash;<style name="AppLoginTheme" parent="Theme.AccountKit">&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="com_accountkit_primary_color">#5c5cff</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="com_accountkit_primary_text_color">#ffff9800</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="com_accountkit_secondary_color">#ffe5e5</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="com_accountkit_secondary_text_color">&ndash;&gt;-->
+            <!--&lt;!&ndash;?attr/com_accountkit_primary_text_color&ndash;&gt;-->
+        <!--&lt;!&ndash;</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="com_accountkit_status_bar_color">#5c5cff</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="com_accountkit_input_text_color">@android:color/black</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="com_accountkit_button_background_color">#ff5a5f</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="com_accountkit_button_text_color">@android:color/white</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="com_accountkit_icon_color">#ff8bc34a</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="com_accountkit_toolbar_elevation">8dp</item>&ndash;&gt;-->
+    <!--&lt;!&ndash;</style>&ndash;&gt;-->
+
+
+</resources>
