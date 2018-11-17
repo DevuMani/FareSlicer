@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_shade"
     >
 
     <include layout="@layout/content_home"
@@ -17,6 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:theme="@style/MyFloatingButton"
+        app:rippleColor="@color/colorAccent"
+        app:srcCompat="@drawable/icon_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

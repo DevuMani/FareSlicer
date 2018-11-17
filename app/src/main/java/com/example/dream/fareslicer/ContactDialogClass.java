@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.ProgressBar;
 
 import com.example.dream.fareslicer.AdapterClasses.ContactListAdapter;
+import com.example.dream.fareslicer.BeanClasses.ContactData;
 
 import java.util.ArrayList;
 
@@ -50,12 +51,34 @@ public class ContactDialogClass extends Dialog {
 
     }
 
+
+
+    private void initView() {
+
+        recyclerView=findViewById(R.id.contact_recyclerView);
+        progressBar=findViewById(R.id.contact_progress);
+        progressBar.setVisibility(View.VISIBLE);
+
+    }
+
+    private void setRecyclerViewData() {
+
+        contact_list= new ArrayList<>();
+        loadContacts();
+        linearLayoutManager=new LinearLayoutManager(context);
+        adapter = new ContactListAdapter(context, contact_list,this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
+        progressBar.setVisibility(View.GONE);
+
+    }
+
     private void loadContacts() {
 
         contact_list= new ArrayList<>();
 
         ContentResolver contentResolver= context.getContentResolver();
-        Cursor cursor=contentResolver.query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null);
+        Cursor cursor=contentResolver.query(ContactsContract.Contacts.CONTENT_URI,null,null,null,ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+" ASC");
 
 
         if (cursor != null && cursor.getCount() > 0) {
@@ -87,25 +110,5 @@ public class ContactDialogClass extends Dialog {
             }
         }
         cursor.close();
-    }
-
-    private void initView() {
-
-        recyclerView=findViewById(R.id.contact_recyclerView);
-        progressBar=findViewById(R.id.contact_progress);
-        progressBar.setVisibility(View.VISIBLE);
-
-    }
-
-    private void setRecyclerViewData() {
-
-        contact_list= new ArrayList<>();
-        loadContacts();
-        linearLayoutManager=new LinearLayoutManager(context);
-        adapter = new ContactListAdapter(context, contact_list,this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapter);
-        progressBar.setVisibility(View.GONE);
-
     }
 }

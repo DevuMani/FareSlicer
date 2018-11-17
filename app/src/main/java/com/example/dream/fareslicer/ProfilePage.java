@@ -3,6 +3,8 @@ package com.example.dream.fareslicer;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -60,6 +63,8 @@ public class ProfilePage extends AppCompatActivity {
     FloatingActionButton save;
     LinearLayout linearLayout;
 
+    ArrayList<String> permissions=new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +76,7 @@ public class ProfilePage extends AppCompatActivity {
         String user_id=sp.getString("user_id","");
         String phn=sp.getString("user_phno","");
 
-
+        setPermission();
         if (!phn.equalsIgnoreCase(""))// change phn to user id
         {
             String n=sp.getString("user_name","");
@@ -145,6 +150,69 @@ public class ProfilePage extends AppCompatActivity {
 
     }
 
+    public void setPermission()
+    {
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_PERMISSIONS);
+            if (info.requestedPermissions != null) {
+                for (String p : info.requestedPermissions) {
+                    Log.d(TAG, "Permission : " + p);
+                    permissions.add(p);
+                }
+
+                checkWriteExternalPermission(permissions);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void checkWriteExternalPermission(ArrayList<String> permission)
+    {
+        ArrayList<String> notgranted =new ArrayList<>();
+
+        for(int i=0;i<permission.size();i++) {
+
+            String per_name=permission.get(i);
+            int res = checkCallingOrSelfPermission(permission.get(i));
+
+            if (res == PackageManager.PERMISSION_GRANTED) {
+
+//                Toast.makeText(getApplicationContext(), permission + "permission granted", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "Permission granted : " + permission.get(i));
+
+            }
+            else {
+//                Toast.makeText(getApplicationContext(), permission + "permission not granted", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "Permission not granted : " + permission.get(i));
+
+                notgranted.add(permission.get(i));
+
+
+            }
+        }
+
+        String[] p=new String[notgranted.size()];
+
+        for (int i=0;i<notgranted.size();i++) {
+            p = notgranted.toArray(new String[i]);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //
+//                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                        //                            takePictureButton.setEnabled(false);
+            requestPermissions(p, 0);
+
+//                    } else {
+//                        Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
+//                    }
+
+        } else {
+            Toast.makeText(this, "You have to give permission externally", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
     //Image Upload
     //--------------------------------------------------------------------------------------------------------------------------
@@ -317,10 +385,15 @@ public class ProfilePage extends AppCompatActivity {
                     if (callResult != null) {
                         text = callResult.getStatus();
 
-                        if(text=="true")
+                        if(text.equalsIgnoreCase("true"))
                         {
                             Snackbar.make(linearLayout,"Saved successfully",Snackbar.LENGTH_SHORT).show();
                             selectCall(tb_phn);
+                        }
+                        else
+                        {
+                            Snackbar.make(linearLayout,"Saved unsuccessful"+text,Snackbar.LENGTH_SHORT).show();
+
                         }
                     }
 

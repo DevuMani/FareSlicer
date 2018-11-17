@@ -1,28 +1,36 @@
 package com.example.dream.fareslicer.AdapterClasses;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.dream.fareslicer.ContactData;
+import com.example.dream.fareslicer.BeanClasses.ContactData;
 import com.example.dream.fareslicer.ContactDialogClass;
 import com.example.dream.fareslicer.Interface.ContactSetter;
 import com.example.dream.fareslicer.NewGroup;
 import com.example.dream.fareslicer.R;
+import com.example.dream.fareslicer.RetrofitClientAndInterface.RetrofitClient;
+import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallOutput;
+import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallResult;
+import com.example.dream.fareslicer.RetrofitInputOutputClasses.QueryValue;
 
-import org.w3c.dom.Text;
-
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -90,9 +98,21 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             {
                 ContactData c_data= contactList.get(getAdapterPosition());
                 Toast.makeText(mContext, "Name : "+c_data.getName(), Toast.LENGTH_SHORT).show();
-                ContactSetter contactSetter=NewGroup.newGroup;
-                contactSetter.setContact(c_data.getName(),c_data.getNumber());
-                contactDialogClass.dismiss();
+
+                selectCall(c_data.getName(),c_data.getNumber());
+
+//                if(b==true)
+//                {
+//                    ContactSetter contactSetter=NewGroup.newGroup;
+//                    contactSetter.setContact(c_data.getName(),c_data.getNumber());
+//                    contactDialogClass.dismiss();
+//                }
+//                else
+//                {
+//                    showAlertDialog();
+//                }
+
+
 
 //                IncomeExpenseActivity.iconsymbol= String.valueOf(c_data.getCategory_name());
 //
@@ -106,6 +126,120 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                 //                Toast.makeText(mContext, "Dataa:::"+String.valueOf(iconList.get(getItemCount())), Toast.LENGTH_SHORT).show();
             }
         }
+
+        private void showAlertDialog() {
+
+
+
+            //init alert dialog
+            final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setCancelable(false);
+            builder.setTitle("Person not using this app");
+            builder.setMessage("Do you want to invite this person?");
+            builder.setCancelable(true);
+            //set listeners for dialog buttons
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //finish the activity
+                    String phoneNumber="9544645653";
+                    String message="Hey user, install FareSlicer ";
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
+                    intent.putExtra("sms_body", message);
+                    mContext.startActivity(intent);
+                }
+            });
+
+            //create the alert dialog and show it
+            builder.create().show();
+        }
+        private void selectCall(final String name, final String number) {
+
+            String query="select user_id from tb_user where user_phno=?";
+            ArrayList<String> value=new ArrayList();
+            value.add(number);
+
+            QueryValue queryValue=new QueryValue();
+            queryValue.setQuery(query);
+            queryValue.setValue(value);
+
+
+
+            final Call<CallResult> call= RetrofitClient. getInstance().getApi().select(queryValue);
+
+            call.enqueue(new Callback<CallResult>() {
+                @Override
+                public void onResponse(Call<CallResult> call, Response<CallResult> response) {
+
+                    if(response.code()==200) {
+
+                        CallResult selectResult=response.body();
+
+                        String success= "";
+                        if (selectResult != null) {
+                            success = selectResult.getStatus();
+
+                            if (success.equalsIgnoreCase("true")) {
+
+                                List<CallOutput> output = selectResult.getOutput();
+
+                                CallOutput item = output.get(0);
+                                List<String> list=item.getValue();
+                                String id=list.get(0);
+
+                                if(!id.equalsIgnoreCase(""))
+                                {
+                                    ContactSetter contactSetter=NewGroup.newGroup;
+                                    contactSetter.setContact(id,name,number);
+                                    contactDialogClass.dismiss();
+
+                                }
+
+
+                            } else {
+                                Log.e("Selection", "Success is false");
+                                showAlertDialog();
+                            }
+                        }
+                        else
+                        {
+                            Log.e("Selection", "Success is null ");
+
+                        }
+
+                    }
+                    else {
+                        String s="";
+                        try {
+                            if (response.errorBody() != null) {
+                                s=response.errorBody().string();
+                            }
+                            else
+                            {
+                                Log.e("Selection","Error body is null");
+                            }
+                        } catch (IOException e) {
+                            Log.e("Insertion",e.getMessage());
+
+                        }
+                    }
+
+
+                }
+
+                @Override
+                public void onFailure(Call<CallResult> call, Throwable t) {
+
+                    Toast.makeText(mContext, "Selection Call failed", Toast.LENGTH_SHORT).show();
+                    Log.e("Selction", t.getMessage());
+                }
+
+            });
+
+
+        }
+
     }
 
 }

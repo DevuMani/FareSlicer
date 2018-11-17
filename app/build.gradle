@@ -42,9 +42,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
-    //App invite
-    implementation 'com.google.android.gms:play-services-appinvite:16.0.5'
-
     //Currency picker
     implementation 'com.github.midorikocak:currency-picker-android:1.1.9'
 

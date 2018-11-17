@@ -5,7 +5,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static final String BaseUrl="http://codenext.us-east-2.elasticbeanstalk.com/";
+//    private static final String BaseUrl="http://codenext.us-east-2.elasticbeanstalk.com/";
+    private static final String BaseUrl="http://fareslicer-env.yeba23rr7a.us-east-2.elasticbeanstalk.com/";
 
     private static RetrofitClient minstance;
     private Retrofit retrofit;

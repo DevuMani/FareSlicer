@@ -1,13 +1,11 @@
 package com.example.dream.fareslicer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,7 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dream.fareslicer.AdapterClasses.ContactListAdapter;
+import com.example.dream.fareslicer.AdapterClasses.MemberListAdapter;
+import com.example.dream.fareslicer.BeanClasses.MemberData;
 import com.example.dream.fareslicer.Interface.ContactSetter;
+import com.google.android.material.snackbar.Snackbar;
 import com.mynameismidori.currencypicker.CurrencyPicker;
 import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
@@ -33,15 +35,23 @@ public class NewGroup extends AppCompatActivity implements ContactSetter {
 
     public static NewGroup newGroup =new NewGroup();
 
+    String selected_user_id="";
     String selected_name="";
     String selected_number="";
+    static ArrayList<MemberData> member_list=new ArrayList<>();
+    MemberData memberData;
+    private static RecyclerView.LayoutManager linearLayoutManager;
+    private static MemberListAdapter adapter;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_group);
 
+
         initView();
+        initRecyclerView();
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("Add Group");
 
@@ -97,14 +107,33 @@ public class NewGroup extends AppCompatActivity implements ContactSetter {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+        initView();
+        initRecyclerView();
+
+    }
+
     private void initView() {
 
+        linearLayout=findViewById(R.id.new_group_layout);
         currency_chooser=findViewById(R.id.profile_currency_select);
         currency=findViewById(R.id.profile_currency);
 
         add_members=findViewById(R.id.layout_add_members);
         member_recyclerView=findViewById(R.id.group_recycler_view);
 
+
+    }
+
+    private void initRecyclerView() {
+        linearLayoutManager=new LinearLayoutManager(NewGroup.this);
+        adapter = new MemberListAdapter(NewGroup.this, member_list);
+        member_recyclerView.setLayoutManager(linearLayoutManager);
+        member_recyclerView.setAdapter(adapter);
     }
 
 
@@ -120,18 +149,39 @@ public class NewGroup extends AppCompatActivity implements ContactSetter {
     }
 
     @Override
-    public void setContact(String name, String number) {
+    public void setContact(String id, String name, String number) {
 
+        selected_user_id=id;
         selected_name=name;
         selected_number=number;
 
 
-        setMemberDataList();
-    }
-
-    private void setMemberDataList() {
-
-
+        setMemberDataList(selected_user_id,selected_name,selected_number);
 
     }
+
+    private void setMemberDataList(String selected_user_id, String selected_name, String selected_number) {
+
+        memberData=new MemberData();
+        memberData.setSelected_user_id(selected_user_id);
+        memberData.setSelected_name(selected_name);
+        memberData.setSelected_number(selected_number);
+
+//        recreate();
+//        initView();
+//        initRecyclerView();
+//        if(member_list.contains(memberData))
+//        {
+//            Snackbar.make(linearLayout,"Already added this member",Snackbar.LENGTH_SHORT).show();
+//        }
+//        else
+//        {
+            member_list.add(memberData);
+
+//        }
+        adapter.notifyDataSetChanged();
+    }
+
+
+    
 }

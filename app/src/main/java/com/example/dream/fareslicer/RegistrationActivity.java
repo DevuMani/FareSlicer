@@ -9,8 +9,11 @@ import android.content.pm.Signature;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import okhttp3.internal.cache.DiskLruCache;
+
 import android.util.Base64;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.accountkit.Account;
@@ -32,6 +35,7 @@ public class RegistrationActivity extends AppCompatActivity {
     public static int APP_REQUEST_CODE = 99;
     ConnectionDetector cd;
 
+    EditText reg_number;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
         cd=new ConnectionDetector(this);
         printHashKey();
 
+        initView();
         if (!cd.isConnectingToInternet()) {
             Toast.makeText(this, "Connect to internet", Toast.LENGTH_SHORT).show();
             showAlertDialog();
@@ -48,6 +53,12 @@ public class RegistrationActivity extends AppCompatActivity {
         {
             phoneLogin();
         }
+
+    }
+
+    private void initView() {
+
+        reg_number=findViewById(R.id.reg_number);
 
     }
 
@@ -128,7 +139,8 @@ public class RegistrationActivity extends AppCompatActivity {
         finish();
     }
 
-    private void setDatatoSharedPreference() {
+    synchronized private void setDatatoSharedPreference() {
+
         AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
             @Override
             public void onSuccess(final Account account) {

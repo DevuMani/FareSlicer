@@ -3,7 +3,8 @@ package com.example.dream.fareslicer.AdapterClasses;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.example.dream.fareslicer.HomeFragment;
+import com.example.dream.fareslicer.GroupFragment;
+import com.example.dream.fareslicer.TransactionFragment;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -32,19 +33,18 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
         Bundle bundle=new Bundle();
         switch (position) {
             case 0:
-                bundle.putInt("tab",0);
-                HomeFragment leaveFragment1=new HomeFragment();
-                leaveFragment1.setArguments(bundle);
 
-                return leaveFragment1;
+
+                TransactionFragment transactionFragment=new TransactionFragment();
+
+                return transactionFragment;
 
             case 1:
 
-                bundle.putInt("tab",1);
-                HomeFragment leaveFragment2=new HomeFragment();
-                leaveFragment2.setArguments(bundle);
 
-                return leaveFragment2;
+                GroupFragment groupFragment=new GroupFragment();
+
+                return groupFragment;
 
 
             default:

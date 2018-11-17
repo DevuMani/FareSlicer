@@ -1,4 +1,4 @@
-package com.example.dream.fareslicer;
+package com.example.dream.fareslicer.BeanClasses;
 
 public class ContactData {
 

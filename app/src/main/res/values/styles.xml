@@ -27,7 +27,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
+    <style name="MyFloatingButton" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/caribbean_green</item>
+    </style>
     <!--&lt;!&ndash;<style name="AppLoginTheme" parent="Theme.AccountKit">&ndash;&gt;-->
         <!--&lt;!&ndash;<item name="com_accountkit_primary_color">#5c5cff</item>&ndash;&gt;-->
         <!--&lt;!&ndash;<item name="com_accountkit_primary_text_color">#ffff9800</item>&ndash;&gt;-->

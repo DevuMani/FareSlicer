@@ -10,5 +10,7 @@
     <color name="text_hint">#e9e8ef</color>
     <color name="Black">#000000</color>
     <color name="colorPrimaryLight">#9455ED</color>
+    <color name="caribbean_green">#00BD98</color>
+    <color name="background_shade">#FFF6FF</color>
 
 </resources>
