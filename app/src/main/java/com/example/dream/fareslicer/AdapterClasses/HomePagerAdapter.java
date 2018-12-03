@@ -3,8 +3,8 @@ package com.example.dream.fareslicer.AdapterClasses;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.example.dream.fareslicer.GroupFragment;
-import com.example.dream.fareslicer.TransactionFragment;
+import com.example.dream.fareslicer.FragmentClasses.GroupFragment;
+import com.example.dream.fareslicer.FragmentClasses.TransactionFragment;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

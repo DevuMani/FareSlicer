@@ -1,4 +1,4 @@
-package com.example.dream.fareslicer;
+package com.example.dream.fareslicer.DialogClass;
 
 import android.app.Dialog;
 import android.content.ContentResolver;
@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.example.dream.fareslicer.AdapterClasses.ContactListAdapter;
 import com.example.dream.fareslicer.BeanClasses.ContactData;
+import com.example.dream.fareslicer.R;
 
 import java.util.ArrayList;
 

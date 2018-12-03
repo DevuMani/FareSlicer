@@ -1,4 +1,4 @@
-package com.example.dream.fareslicer;
+package com.example.dream.fareslicer.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.dream.fareslicer.R;
 import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallOutput;
 import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallResult;
 import com.example.dream.fareslicer.RetrofitInputOutputClasses.QueryValue;
@@ -372,7 +373,7 @@ public class ProfilePage extends AppCompatActivity {
         queryValue.setValue(value);
 
 
-        Call<CallResult> call= RetrofitClient.getInstance().getApi().insertUser(queryValue);
+        Call<CallResult> call= RetrofitClient.getInstance().getApi().insert(queryValue);
 
         call.enqueue(new Callback<CallResult>() {
             @Override

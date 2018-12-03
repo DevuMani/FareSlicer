@@ -2,15 +2,19 @@
 <resources>
     <color name="colorPrimary">#6b0cef</color>
     <color name="colorPrimaryDark">#4b00d6</color>
-    <color name="colorAccent">#D500F9</color>
+    <color name="colorAccent">#D500F9</color>       <!--psychedelic_purple-->
 
     <color name="white">#ffffff</color>
-    <color name="default_color">#0099E1</color>
-    <color name="reverb_dark">#262261</color>
-    <color name="text_hint">#e9e8ef</color>
+    <color name="default_color">#0099E1</color>     <!--pacific_blue-->
+    <color name="reverb_dark">#262261</color>       <!--Paris M-->
+    <color name="text_hint">#e9e8ef</color>         <!--light_grey-->
     <color name="Black">#000000</color>
-    <color name="colorPrimaryLight">#9455ED</color>
+    <color name="colorPrimaryLight">#9455ED</color> <!--dark_violet-->
     <color name="caribbean_green">#00BD98</color>
-    <color name="background_shade">#FFF6FF</color>
+    <color name="background_shade">#FFF6FF</color>  <!--light-->
+    <color name="background_shade1">#E6F4F1</color> <!--pacific_blue-->
+    <color name="background_shade2">#EEEEEE</color>
+    <color name="background_shade3">#F5F5F5</color>
+    <color name="navy_blue">#0065FF</color>                  <!--navy_blue-->
 
 </resources>

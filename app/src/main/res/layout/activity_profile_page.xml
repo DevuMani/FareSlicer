@@ -11,7 +11,7 @@
     android:paddingRight="40dp"
     android:paddingTop="50dp"
     android:paddingBottom="50dp"
-    tools:context=".ProfilePage">
+    tools:context=".Activities.ProfilePage">
 
     <FrameLayout
         android:background="@android:color/transparent"

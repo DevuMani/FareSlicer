@@ -17,6 +17,10 @@
             android:title="@string/menu_passcode"
             android:icon="@drawable/menu_passcode_icon"/>
         <item
+            android:id="@+id/menu_clear_passcode"
+            android:title="Clear Password"
+            android:icon="@drawable/menu_passcode_icon"/>
+        <item
             android:id="@+id/menu_rate"
             android:title="@string/menu_rate_us"
             android:icon="@drawable/menu_rate_icon"/>

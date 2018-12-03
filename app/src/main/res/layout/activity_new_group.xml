@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NewGroup">
+    tools:context=".Activities.NewGroup">
 
 
     <LinearLayout
@@ -36,7 +36,7 @@
                     android:inputType="text"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:hint="Username"/>
+                    android:hint="Group Name"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -124,6 +124,18 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                >
+
+                <ProgressBar
+                    android:id="@+id/group_member_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5">
@@ -164,6 +176,7 @@
             android:layout_below="@+id/linearlayout2">
 
             <Button
+                android:id="@+id/group_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_round_curve"

@@ -17,5 +17,11 @@
     <string name="tab_groups">Groups</string>
     <string name="no_transaction_found">No transaction found</string>
     <string name="Rs">\u20B9</string>
+    <string name="group_members_heading">Members :</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="fare_slicing_mode">Fare Slicing Mode:</string>
+    <string name="share_among">Share among:</string>
+    <string name="share_percentage_symbol">%</string>
+    <string name="share_text">share(s)</string>
 
 </resources>

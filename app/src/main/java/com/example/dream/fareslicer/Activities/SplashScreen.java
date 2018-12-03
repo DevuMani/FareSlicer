@@ -1,4 +1,4 @@
-package com.example.dream.fareslicer;
+package com.example.dream.fareslicer.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,10 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
+import com.example.dream.fareslicer.R;
+
 public class SplashScreen extends AppCompatActivity {
 
     String userID="";
     String user_phone="";
+    Boolean pass=false;
 
     ProgressBar progressBar;
 
@@ -36,11 +39,20 @@ public class SplashScreen extends AppCompatActivity {
                 SharedPreferences sp=getSharedPreferences("User",MODE_PRIVATE);
                 userID=sp.getString("user_id","");
                 user_phone=sp.getString("user_phno","");
+                pass=sp.getBoolean("Password",false);
                 if(!user_phone.equals("")) {
-                    Intent mainIntent = new Intent(SplashScreen.this, Home.class);
-                    SplashScreen.this.startActivity(mainIntent);
-                    SplashScreen.this.finish();
 
+                    if(pass==true) {
+                        Intent mainIntent = new Intent(SplashScreen.this, PasswordSettingScreen.class);
+                        mainIntent.putExtra("from","splash");
+                        SplashScreen.this.startActivity(mainIntent);
+                        SplashScreen.this.finish();
+                    }
+                    else {
+                        Intent mainIntent = new Intent(SplashScreen.this, Home.class);
+                        SplashScreen.this.startActivity(mainIntent);
+                        SplashScreen.this.finish();
+                    }
                 }
                 else
                 {

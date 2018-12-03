@@ -1,4 +1,4 @@
-package com.example.dream.fareslicer;
+package com.example.dream.fareslicer.FragmentClasses;
 
 
 import android.content.Intent;
@@ -8,16 +8,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.dream.fareslicer.AdapterClasses.ContactListAdapter;
+import com.example.dream.fareslicer.Activities.NewGroup;
+import com.example.dream.fareslicer.Activities.RegistrationActivity;
 import com.example.dream.fareslicer.AdapterClasses.GroupListAdapter;
 import com.example.dream.fareslicer.BeanClasses.GroupData;
+import com.example.dream.fareslicer.R;
 import com.example.dream.fareslicer.RetrofitClientAndInterface.RetrofitClient;
 import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallOutput;
 import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallResult;
@@ -30,7 +31,6 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +48,7 @@ public class GroupFragment extends Fragment {
 
     ProgressBar progressBar;
     RecyclerView recyclerView;
-    LinearLayout no_data_layout,data_layout;
+    LinearLayout no_data_layout,data_layout,heading_layout;
 
     String count_parameter="";
 
@@ -118,15 +118,18 @@ public class GroupFragment extends Fragment {
     private void initialize(View rootView) {
 
         progressBar=rootView.findViewById(R.id.home_progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         recyclerView=rootView.findViewById(R.id.home_recyclerView);
 
         fab=rootView.findViewById(R.id.home_fab);
         owe_amount=rootView.findViewById(R.id.owe_amount);
         amount_own=rootView.findViewById(R.id.amount_own);
 
+        heading_layout=rootView.findViewById(R.id.home_transaction_heading_layout);
         no_data_layout=rootView.findViewById(R.id.home_no_transaction_layout);
+        no_data_layout.setVisibility(View.GONE);
         data_layout=rootView.findViewById(R.id.home_transaction_layout);
-
+        data_layout.setVisibility(View.GONE);
         linearHead=rootView.findViewById(R.id.linear_head_text);
 
 
@@ -144,6 +147,7 @@ public class GroupFragment extends Fragment {
             public void onClick(View view) {
 
                 Intent intent=new Intent(getActivity(),NewGroup.class);
+                intent.putExtra("g_id","");
                 startActivity(intent);
             }
         });
@@ -169,7 +173,7 @@ public class GroupFragment extends Fragment {
         SharedPreferences sp=getContext().getSharedPreferences("User",MODE_PRIVATE);
         String user_id=sp.getString("user_id","");
 
-        String query="select t1.group_id,t1.group_name from tb_group t1,tb_member t2 where t1.group_id = t2.group_id and t2.user_id =?";
+        String query="select DISTINCT t1.group_id,t1.group_name,t1.group_currency from tb_group t1,tb_member t2 where t1.group_id = t2.group_id and t2.user_id =?";
         ArrayList<String> value=new ArrayList();
         value.add(user_id);
 
@@ -202,7 +206,8 @@ public class GroupFragment extends Fragment {
                                 List<String> list = item.getValue();
                                 String id = list.get(0);
                                 String name=list.get(1);
-                                groupData=new GroupData(id,name);
+                                String currency=list.get(2);
+                                groupData=new GroupData(id,name,currency);
 
                                 groupList.add(groupData);
 
@@ -212,7 +217,9 @@ public class GroupFragment extends Fragment {
                             adapter.notifyDataSetChanged();
                             if(groupList.isEmpty())
                             {
+
                                 no_data_layout.setVisibility(View.VISIBLE);
+                                heading_layout.setVisibility(View.GONE);
                                 data_layout.setVisibility(View.GONE);
                                 progressBar.setVisibility(View.GONE);
 
@@ -221,6 +228,7 @@ public class GroupFragment extends Fragment {
                             else
                             {
                                 no_data_layout.setVisibility(View.GONE);
+                                heading_layout.setVisibility(View.VISIBLE);
                                 data_layout.setVisibility(View.VISIBLE);
                                 progressBar.setVisibility(View.GONE);
 

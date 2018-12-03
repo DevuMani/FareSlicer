@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashScreen"
+            android:name=".Activities.SplashScreen"
             android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistrationActivity">
+        <activity android:name=".Activities.RegistrationActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -58,7 +58,7 @@
             android:theme="@style/AppLoginTheme"
             tools:replace="android:theme" />
         <activity
-            android:name=".Home"
+            android:name=".Activities.Home"
             android:theme="@style/AppTheme.NoActionBar">
 
             <!-- <intent-filter> -->
@@ -68,7 +68,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".ProfilePage" />
+        <activity android:name=".Activities.ProfilePage" />
         <activity android:name=".TestActivity">
 
             <!-- <intent-filter> -->
@@ -78,8 +78,13 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".NewGroup" />
-        <activity android:name=".GroupActivity"></activity>
+        <activity
+            android:name=".Activities.NewGroup"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activities.GroupActivity" />
+        <activity android:name=".Activities.PassCodeActivity" />
+        <activity android:name=".Activities.PasswordSettingScreen" />
+        <activity android:name=".Activities.AddExpense"></activity>
     </application>
 
 </manifest>

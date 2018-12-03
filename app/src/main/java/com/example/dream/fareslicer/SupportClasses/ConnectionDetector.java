@@ -1,4 +1,4 @@
-package com.example.dream.fareslicer;
+package com.example.dream.fareslicer.SupportClasses;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

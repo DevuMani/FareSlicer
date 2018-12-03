@@ -13,9 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dream.fareslicer.BeanClasses.ContactData;
-import com.example.dream.fareslicer.ContactDialogClass;
+import com.example.dream.fareslicer.DialogClass.ContactDialogClass;
 import com.example.dream.fareslicer.Interface.ContactSetter;
-import com.example.dream.fareslicer.NewGroup;
+import com.example.dream.fareslicer.Activities.NewGroup;
 import com.example.dream.fareslicer.R;
 import com.example.dream.fareslicer.RetrofitClientAndInterface.RetrofitClient;
 import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallOutput;
@@ -52,7 +52,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View v = LayoutInflater.from(mContext).inflate(R.layout.contact_list_cust_row, parent,false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.cust_row_contact_list, parent,false);
         MyViewHolder viewHolder = new MyViewHolder(v);
         return viewHolder;
     }

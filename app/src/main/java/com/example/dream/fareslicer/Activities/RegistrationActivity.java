@@ -1,4 +1,4 @@
-package com.example.dream.fareslicer;
+package com.example.dream.fareslicer.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,13 +9,14 @@ import android.content.pm.Signature;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import okhttp3.internal.cache.DiskLruCache;
 
 import android.util.Base64;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.dream.fareslicer.SupportClasses.ConnectionDetector;
+import com.example.dream.fareslicer.R;
 import com.facebook.accountkit.Account;
 import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.AccountKitCallback;
