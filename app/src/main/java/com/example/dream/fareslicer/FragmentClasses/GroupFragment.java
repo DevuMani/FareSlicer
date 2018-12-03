@@ -254,13 +254,14 @@ public class GroupFragment extends Fragment {
                     try {
                         if (response.errorBody() != null) {
                             s=response.errorBody().string();
+                            Log.e("Selection","Error body is "+s);
                         }
                         else
                         {
                             Log.e("Selection","Error body is null");
                         }
                     } catch (IOException e) {
-                        Log.e("Insertion",e.getMessage());
+                        Log.e("Selection",e.getMessage());
 
                     }
                 }
@@ -270,7 +271,7 @@ public class GroupFragment extends Fragment {
             public void onFailure(Call<CallResult> call, Throwable t) {
 
                 Toast.makeText(getContext(), "Selection Call failed", Toast.LENGTH_SHORT).show();
-                Log.e("Selction", t.getMessage());
+                Log.e("Selection", t.getMessage());
             }
 
         });

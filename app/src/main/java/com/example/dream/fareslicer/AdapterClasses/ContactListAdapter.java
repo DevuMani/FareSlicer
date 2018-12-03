@@ -214,6 +214,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                         try {
                             if (response.errorBody() != null) {
                                 s=response.errorBody().string();
+                                Log.e("Selection","Error body is "+s);
                             }
                             else
                             {
@@ -232,7 +233,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                 public void onFailure(Call<CallResult> call, Throwable t) {
 
                     Toast.makeText(mContext, "Selection Call failed", Toast.LENGTH_SHORT).show();
-                    Log.e("Selction", t.getMessage());
+                    Log.e("Selection", t.getMessage());
                 }
 
             });

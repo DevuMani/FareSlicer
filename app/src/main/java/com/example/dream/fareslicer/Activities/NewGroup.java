@@ -329,6 +329,7 @@ public class NewGroup extends AppCompatActivity implements ContactSetter {
                     try {
                         if (response.errorBody() != null) {
                             s=response.errorBody().string();
+                            Log.e("NewGroup Selection","Error body is "+s);
                         }
                         else
                         {
@@ -417,6 +418,7 @@ public class NewGroup extends AppCompatActivity implements ContactSetter {
                     try {
                         if (response.errorBody() != null) {
                             s=response.errorBody().string();
+                            Log.e("NewGroup Selection","Error body is "+s);
                         }
                         else
                         {
@@ -499,6 +501,7 @@ public class NewGroup extends AppCompatActivity implements ContactSetter {
                     try {
                         if (response.errorBody() != null) {
                             s=response.errorBody().string();
+                            Log.e("NewGroup insertion","Error body is "+s);
                         }
                         else
                         {
@@ -604,6 +607,7 @@ public class NewGroup extends AppCompatActivity implements ContactSetter {
                     try {
                         if (response.errorBody() != null) {
                             s=response.errorBody().string();
+                            Log.e("NewGroup insertion","Error body is "+s);
                         }
                         else
                         {
@@ -689,6 +693,7 @@ public class NewGroup extends AppCompatActivity implements ContactSetter {
                         try {
                             if (response.errorBody() != null) {
                                 s = response.errorBody().string();
+                                Log.e("NewGroup insertion","Error body is "+s);
                             } else {
                                 Log.e("NewGroup insertion", "Error body is null");
                             }

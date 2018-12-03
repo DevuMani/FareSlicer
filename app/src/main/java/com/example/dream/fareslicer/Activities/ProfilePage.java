@@ -406,6 +406,8 @@ public class ProfilePage extends AppCompatActivity {
                     try {
                         if (response.errorBody() != null) {
                             s=response.errorBody().string();
+                            Log.e("Insertion","Error body is "+s);
+
                         }
                         else
                         {
@@ -482,13 +484,14 @@ public class ProfilePage extends AppCompatActivity {
                     try {
                         if (response.errorBody() != null) {
                             s=response.errorBody().string();
+                            Log.e("Selection","Error body is "+s);
                         }
                         else
                         {
                             Log.e("Selection","Error body is null");
                         }
                     } catch (IOException e) {
-                        Log.e("Insertion",e.getMessage());
+                        Log.e("Selection",e.getMessage());
 
                     }
                 }
@@ -498,7 +501,7 @@ public class ProfilePage extends AppCompatActivity {
             public void onFailure(Call<CallResult> call, Throwable t) {
 
                 Toast.makeText(ProfilePage.this, "Selection Call failed", Toast.LENGTH_SHORT).show();
-                Log.e("Selction", t.getMessage());
+                Log.e("Selection", t.getMessage());
             }
 
         });
@@ -599,6 +602,7 @@ public class ProfilePage extends AppCompatActivity {
     }
 
     public static String getPath(Context context, Uri uri) throws URISyntaxException {
+
         if ("content".equalsIgnoreCase(uri.getScheme())) {
             String[] projection = { "_data" };
             Cursor cursor = null;

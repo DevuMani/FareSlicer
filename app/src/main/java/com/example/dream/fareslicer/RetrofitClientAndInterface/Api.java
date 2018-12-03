@@ -14,11 +14,7 @@ public interface Api {
     @POST("insert")
     Call<CallResult> insert(@Body QueryValue queryValue);
 
-
     @POST("select")
     Call<CallResult> select(@Body QueryValue queryValue);
-
-    @POST("delete")
-    Call<CallResult> delete(@Body QueryValue queryValue);
 
 }
