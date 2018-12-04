@@ -84,7 +84,9 @@
         <activity android:name=".Activities.GroupActivity" />
         <activity android:name=".Activities.PassCodeActivity" />
         <activity android:name=".Activities.PasswordSettingScreen" />
-        <activity android:name=".Activities.AddExpense"></activity>
+        <activity android:name=".Activities.AddExpense" />
+        <activity android:name=".Activities.NotificationActivity"
+            android:theme="@style/AppThemeNoActionBar"></activity>
     </application>
 
 </manifest>

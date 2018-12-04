@@ -23,5 +23,11 @@
     <string name="share_among">Share among:</string>
     <string name="share_percentage_symbol">%</string>
     <string name="share_text">share(s)</string>
+    <string name="email_notifications_text">Email Notifications</string>
+    <string name="mobile_notifications_text">Mobile Notifications</string>
+    <string name="all_notifications_text">All Notifications</string>
+
+    <string name="radio_enable">Enable</string>
+    <string name="radio_disable">Disable</string>
 
 </resources>

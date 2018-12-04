@@ -277,7 +277,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
 
             case R.id.menu_notification:
-                Toast.makeText(this, "Clicked Notification", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Clicked Notification", Toast.LENGTH_SHORT).show();
+                Intent notification_intent=new Intent(Home.this,NotificationActivity.class);
+                notification_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(notification_intent);
                 break;
             case R.id.menu_passcode:
                 Toast.makeText(this, "Clicked Passcode", Toast.LENGTH_SHORT).show();

@@ -49,7 +49,6 @@ import static android.graphics.Bitmap.Config.RGB_565;
 public class ProfilePage extends AppCompatActivity {
 
     private static final String TAG = "Profile Page";
-    private static Bitmap.Config BITMAP_CONFIG = null;
     public File file;
     public File files;
     Uri imageUri;
@@ -57,8 +56,6 @@ public class ProfilePage extends AppCompatActivity {
 
     private static final int FILE_SELECT_CODE = 0;
     ImageView imageview;
-
-    Bitmap bitmap=null;
 
     EditText name,phno,email;
     FloatingActionButton save;
@@ -113,13 +110,6 @@ public class ProfilePage extends AppCompatActivity {
         else {
 
         }
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            BITMAP_CONFIG = RGBA_F16;
-        }
-        else
-        {
-            BITMAP_CONFIG = RGB_565;
-        }
 
         imageview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +125,6 @@ public class ProfilePage extends AppCompatActivity {
                 saveFunction();
             }
         });
-//        filewrite();//should be written on onSave
     }
 
 
@@ -151,8 +140,7 @@ public class ProfilePage extends AppCompatActivity {
 
     }
 
-    public void setPermission()
-    {
+    public void setPermission() {
         try {
             PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_PERMISSIONS);
             if (info.requestedPermissions != null) {
@@ -168,8 +156,7 @@ public class ProfilePage extends AppCompatActivity {
         }
     }
 
-    private void checkWriteExternalPermission(ArrayList<String> permission)
-    {
+    private void checkWriteExternalPermission(ArrayList<String> permission) {
         ArrayList<String> notgranted =new ArrayList<>();
 
         for(int i=0;i<permission.size();i++) {
@@ -288,7 +275,6 @@ public class ProfilePage extends AppCompatActivity {
 //            super.onActivityResult(requestCode, resultCode, data);
 //        }
 //    }
-
 
     private void saveFunction() {
 
@@ -462,6 +448,9 @@ public class ProfilePage extends AppCompatActivity {
                             List<String> list=item.getValue();
                             String id=list.get(0);
 
+                            insertNotificationCall(id);//To insert user_id's to notification table
+
+
                             SharedPreferences sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
                             SharedPreferences.Editor editor=sharedPreferences.edit();
                             editor.putString("user_id",id);
@@ -502,6 +491,70 @@ public class ProfilePage extends AppCompatActivity {
 
                 Toast.makeText(ProfilePage.this, "Selection Call failed", Toast.LENGTH_SHORT).show();
                 Log.e("Selection", t.getMessage());
+            }
+
+        });
+    }
+
+    private void insertNotificationCall(String id) {
+
+        String query="insert into tb_notification (user_id) values(?)";
+        ArrayList<String> value=new ArrayList();
+        value.add(id);
+
+        QueryValue queryValue=new QueryValue();
+        queryValue.setQuery(query);
+        queryValue.setValue(value);
+
+
+        Call<CallResult> call= RetrofitClient.getInstance().getApi().insert(queryValue);
+
+        call.enqueue(new Callback<CallResult>() {
+            @Override
+            public void onResponse(Call<CallResult> call, Response<CallResult> response) {
+
+                if(response.code()==200)
+                {
+                    CallResult callResult=response.body();
+                    String text= "";
+                    if (callResult != null) {
+                        text = callResult.getStatus();
+
+                        if(text.equalsIgnoreCase("true"))
+                        {
+                            Log.d("Profile Notification","inserted");
+                        }
+                        else
+                        {
+                            Log.d("Profile Notification",text);
+
+                        }
+                    }
+
+                }
+                else {
+                    String s="";
+                    try {
+                        if (response.errorBody() != null) {
+                            s=response.errorBody().string();
+                            Log.e("Insertion","Error body is "+s);
+
+                        }
+                        else
+                        {
+                            Log.e("Insertion","Error body is null");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CallResult> call, Throwable t) {
+
+                Toast.makeText(ProfilePage.this, "Insert Call failed", Toast.LENGTH_SHORT).show();
+                Log.e("Insert", t.getMessage());
             }
 
         });
@@ -572,8 +625,8 @@ public class ProfilePage extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-    public void filewrite()
-    {
+
+    public void filewrite() {
         FileOutputStream outStream = null;
         try
         {
