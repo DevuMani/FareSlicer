@@ -42,7 +42,7 @@ public class ContactDialogClass extends Dialog {
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.contact_list_dialog);
+        setContentView(R.layout.dialog_contact_list);
 
         initView();
 
