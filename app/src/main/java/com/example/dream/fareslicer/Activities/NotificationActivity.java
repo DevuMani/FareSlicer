@@ -35,9 +35,9 @@ import android.widget.Toast;
 
 import com.example.dream.fareslicer.R;
 import com.example.dream.fareslicer.RetrofitClientAndInterface.RetrofitClient;
-import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallOutput;
-import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallResult;
-import com.example.dream.fareslicer.RetrofitInputOutputClasses.QueryValue;
+import com.example.dream.fareslicer.RetrofitInputOutputClasses.CommonInputOutputClasses.CallOutput;
+import com.example.dream.fareslicer.RetrofitInputOutputClasses.CommonInputOutputClasses.CallResult;
+import com.example.dream.fareslicer.RetrofitInputOutputClasses.CommonInputOutputClasses.QueryValue;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -411,7 +411,7 @@ public class NotificationActivity extends AppCompatActivity implements Navigatio
 
                 break;
             case R.id.menu_passcode:
-                Toast.makeText(this, "Clicked Passcode", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Clicked Passcode", Toast.LENGTH_SHORT).show();
                 SharedPreferences sp=getSharedPreferences("User",Context.MODE_PRIVATE);
                 Boolean pass=sp.getBoolean("Password",false);
                 if(pass==true)
@@ -466,7 +466,7 @@ public class NotificationActivity extends AppCompatActivity implements Navigatio
                         Intent intent=new Intent(NotificationActivity.this,PasswordSettingScreen.class);
                         intent.putExtra("from","clear");
                         startActivity(intent);
-                        Toast.makeText(NotificationActivity.this, "Clear password", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Home.this, "Clear password", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

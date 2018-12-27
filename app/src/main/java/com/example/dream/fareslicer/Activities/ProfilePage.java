@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 
 import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
@@ -25,15 +24,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dream.fareslicer.R;
-import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallOutput;
-import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallResult;
-import com.example.dream.fareslicer.RetrofitInputOutputClasses.QueryValue;
+import com.example.dream.fareslicer.RetrofitInputOutputClasses.CommonInputOutputClasses.CallOutput;
+import com.example.dream.fareslicer.RetrofitInputOutputClasses.CommonInputOutputClasses.CallResult;
+import com.example.dream.fareslicer.RetrofitInputOutputClasses.CommonInputOutputClasses.QueryValue;
 import com.example.dream.fareslicer.RetrofitClientAndInterface.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.mynameismidori.currencypicker.CurrencyPicker;
+import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,10 +45,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import static android.graphics.Bitmap.Config.RGBA_F16;
-import static android.graphics.Bitmap.Config.RGB_565;
 
 public class ProfilePage extends AppCompatActivity {
 
@@ -63,19 +63,24 @@ public class ProfilePage extends AppCompatActivity {
 
     ArrayList<String> permissions=new ArrayList<>();
 
+    String user_id="";
+    private ImageView currency_chooser;
+    private TextView group_currency;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
+        
         initView();
 
         SharedPreferences sp=getSharedPreferences("User",MODE_PRIVATE);
-        String user_id=sp.getString("user_id","");
+        user_id=sp.getString("user_id","");
         String phn=sp.getString("user_phno","");
 
         setPermission();
-        if (!phn.equalsIgnoreCase(""))// change phn to user id
+        if (!user_id.equalsIgnoreCase(""))// change phn to user id
         {
             String n=sp.getString("user_name","");
             name.setText(n);
@@ -90,15 +95,14 @@ public class ProfilePage extends AppCompatActivity {
 
             }
             email.setText(sp.getString("user_email",""));
+
             fileName=sp.getString("user_photo","");
             String path= Environment.getExternalStorageDirectory() + File.separator + "FareSlicer"+ File.separator +fileName;
 
             if(fileName.equals("")) {
 
-                Random rnd = new Random();
-                int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-                imageview.setBackgroundColor(color);
-//                imageview.setBackgroundColor(0xff00ff00);
+                imageview.setImageDrawable(getDrawable(R.drawable.ic_user));
+
             } else {
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
 
@@ -106,9 +110,23 @@ public class ProfilePage extends AppCompatActivity {
                 imageview.setImageBitmap(bitmap);
             }
 
+            group_currency.setText(sp.getString("user_currency",""));
+            currency_chooser.setVisibility(View.GONE);
+
         }
         else {
 
+            currency_chooser.setVisibility(View.VISIBLE);
+            if (phn.equalsIgnoreCase(""))
+            {
+                phno.setEnabled(true);
+            }
+            else
+            {
+                phno.setText(phn);
+                phno.setEnabled(false);
+
+            }
         }
 
         imageview.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +143,14 @@ public class ProfilePage extends AppCompatActivity {
                 saveFunction();
             }
         });
+
+        currency_chooser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                currencyPicker();
+            }
+        });
     }
 
 
@@ -134,6 +160,10 @@ public class ProfilePage extends AppCompatActivity {
         name=findViewById(R.id.profile_userName);
         phno=findViewById(R.id.profile_phno);
         email=findViewById(R.id.profile_email);
+
+        currency_chooser=findViewById(R.id.profile_currency_select);
+        group_currency =findViewById(R.id.profile_currency);
+
         linearLayout=findViewById(R.id.profile_linearLayout);
 
         save=findViewById(R.id.profile_save);
@@ -166,12 +196,11 @@ public class ProfilePage extends AppCompatActivity {
 
             if (res == PackageManager.PERMISSION_GRANTED) {
 
-//                Toast.makeText(getApplicationContext(), permission + "permission granted", Toast.LENGTH_LONG).show();
                 Log.d(TAG, "Permission granted : " + permission.get(i));
 
             }
             else {
-//                Toast.makeText(getApplicationContext(), permission + "permission not granted", Toast.LENGTH_LONG).show();
+
                 Log.d(TAG, "Permission not granted : " + permission.get(i));
 
                 notgranted.add(permission.get(i));
@@ -187,38 +216,14 @@ public class ProfilePage extends AppCompatActivity {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //
-//                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//                        //                            takePictureButton.setEnabled(false);
-            requestPermissions(p, 0);
 
-//                    } else {
-//                        Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
-//                    }
+           requestPermissions(p, 0);
 
         } else {
             Toast.makeText(this, "You have to give permission externally", Toast.LENGTH_SHORT).show();
         }
 
     }
-
-    //Image Upload
-    //--------------------------------------------------------------------------------------------------------------------------
-//    private void showFileChooser() {
-//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//        intent.setType("*/*");
-//        intent.addCategory(Intent.CATEGORY_OPENABLE);
-//
-//        try {
-//            startActivityForResult(
-//                    Intent.createChooser(intent, "Select a File to Upload"),
-//                    FILE_SELECT_CODE);
-//        } catch (android.content.ActivityNotFoundException ex) {
-//            // Potentially direct the user to the Market with a Dialog
-//            Toast.makeText(this, "Please install a File Manager.",
-//                    Toast.LENGTH_SHORT).show();
-//        }
-//    }
 
     private void showFileChooser() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -228,53 +233,34 @@ public class ProfilePage extends AppCompatActivity {
                 FILE_SELECT_CODE);
     }
 
-    //To directly show the bitmap..
+    private void currencyPicker() {
 
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-//    {
-//        if (requestCode == FILE_SELECT_CODE)
-//        {
-//            if(data!=null)
-//            {
-//                try
-//                {
-//                    if (bitmap != null)
-//                    {
-//                        bitmap.recycle();
-//                    }
-//
-//                    InputStream stream = getContentResolver().openInputStream(data.getData());
-//                    bitmap = BitmapFactory.decodeStream(stream);
-//                    stream.close();
-//                    imageview.setImageBitmap(bitmap);
-//                }
-//
-//                catch (FileNotFoundException e)
-//                {
-//                    e.printStackTrace();
-//                }
-//
-//                catch (IOException e)
-//                {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            else
-//            {
-//                Drawable drawable = getResources().getDrawable(R.drawable.ic_user);
-//                bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), BITMAP_CONFIG);
-//                Canvas canvas = new Canvas(bitmap);
-//                drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-//                drawable.clearColorFilter();
-//                drawable.draw(canvas);
-//
-//                imageview.setImageBitmap(bitmap);
-//            }
-//
-//            super.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
+        final CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");  // dialog title
+
+        picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+        picker.setListener(new CurrencyPickerListener() {
+            @Override
+            public void onSelectCurrency(String name, String code, String symbol, int flagDrawableResID) {
+                // Implement your code here
+
+                Toast.makeText(ProfilePage.this, "Currency "+name, Toast.LENGTH_SHORT).show();
+//                        im_currency.setImageDrawable();
+
+                if(code.equalsIgnoreCase("INR"))
+                {
+                    group_currency.setText(R.string.Rs);
+                }
+                else {
+                    group_currency.setText(symbol);
+                }
+                picker.dismiss();
+            }
+
+        });
+
+    }
+
 
     private void saveFunction() {
 
@@ -282,10 +268,12 @@ public class ProfilePage extends AppCompatActivity {
         String tb_phn=phno.getText().toString();
         String tb_email=email.getText().toString();
         String tb_image=fileName;
+        String tb_currency=group_currency.getText().toString();
 
         Boolean save=false;
 
         filewrite();
+
         if(tb_name.equalsIgnoreCase(""))
         {
             Snackbar.make(linearLayout,"Name should not be empty",Snackbar.LENGTH_SHORT).show();
@@ -303,6 +291,12 @@ public class ProfilePage extends AppCompatActivity {
             save=false;
 
         }
+        else if (tb_currency.equalsIgnoreCase("set"))
+        {
+            Snackbar.make(linearLayout,"You should choose a cuurency",Snackbar.LENGTH_SHORT).show();
+            save=false;
+
+        }
         else
         {
             save=true;
@@ -315,40 +309,132 @@ public class ProfilePage extends AppCompatActivity {
 
             String query="";
             ArrayList<String> value=new ArrayList();
-            if (tb_image.equalsIgnoreCase(""))
-            {
+            if(user_id.equalsIgnoreCase("")) {
 
-                query="insert into tb_user (user_name,user_phno,user_email) values(?,?,?)";
-                value.add(tb_name);
-                value.add(tb_phn);
-                value.add(tb_email);
+                if (tb_image.equalsIgnoreCase("")) {
 
-                editor.putString("user_name",tb_name);
-                editor.putString("user_phno",tb_phn);
-                editor.putString("user_email",tb_email);
-                editor.putString("user_photo","");
+                    query = "insert into tb_user (user_name,user_phno,user_email,user_currency) values(?,?,?,?)";
+                    value.add(tb_name);
+                    value.add(tb_phn.replaceAll("\\s",""));
+                    value.add(tb_email);
+                    value.add(tb_currency);
 
+                    editor.putString("user_name", tb_name);
+                    editor.putString("user_phno", tb_phn.replaceAll("\\s",""));
+                    editor.putString("user_email", tb_email);
+                    editor.putString("user_photo", "");
+                    editor.putString("user_currency",tb_currency);
+
+                } else {
+
+                    query = "insert into tb_user (user_name,user_phno,user_email,user_currency,user_photo) values(?,?,?,?,?)";
+                    value.add(tb_name);
+                    value.add(tb_phn.replaceAll("\\s",""));
+                    value.add(tb_email);
+                    value.add(tb_image);
+                    value.add(tb_currency);
+
+                    editor.putString("user_name", tb_name);
+                    editor.putString("user_phno", tb_phn.replaceAll("\\s",""));
+                    editor.putString("user_email", tb_email);
+                    editor.putString("user_photo", tb_image);
+                    editor.putString("user_currency",tb_currency);
+
+                }
+                editor.apply();
+
+                insertCall(query,value,tb_phn);
             }
             else
             {
-
-                query="insert into tb_user (user_name,user_phno,user_email,user_photo) values(?,?,?,?)";
+//                query = "insert into tb_user (user_name,user_phno,user_email) values(?,?,?)";
+                query="update tb_user set user_name=?,user_phno=?,user_email=?,user_photo=? where user_id=?";
                 value.add(tb_name);
                 value.add(tb_phn);
                 value.add(tb_email);
                 value.add(tb_image);
+                value.add(user_id);
 
-                editor.putString("user_name",tb_name);
-                editor.putString("user_phno",tb_phn);
-                editor.putString("user_email",tb_email);
-                editor.putString("user_photo",tb_image);
+                editor.putString("user_id", user_id);
+                editor.putString("user_name", tb_name);
+                editor.putString("user_phno", tb_phn);
+                editor.putString("user_email", tb_email);
+                editor.putString("user_photo", tb_image);
+                editor.apply();
 
+                updateCall(query,value);
             }
 
-            editor.apply();
 
-            insertCall(query,value,tb_phn);
+
         }
+
+    }
+
+    private void updateCall(String query, ArrayList<String> value) {
+
+        QueryValue queryValue=new QueryValue();
+        queryValue.setQuery(query);
+        queryValue.setValue(value);
+
+
+        Call<CallResult> call= RetrofitClient.getInstance().getApi().insert(queryValue);
+
+        call.enqueue(new Callback<CallResult>() {
+            @Override
+            public void onResponse(Call<CallResult> call, Response<CallResult> response) {
+
+                if(response.code()==200)
+                {
+                    CallResult callResult=response.body();
+                    String text= "";
+                    if (callResult != null) {
+                        text = callResult.getStatus();
+
+                        if(text.equalsIgnoreCase("true"))
+                        {
+                            Snackbar.make(linearLayout,"Updated successfully",Snackbar.LENGTH_SHORT).show();
+                            startActivity(new Intent(ProfilePage.this,Home.class));
+                            finish();
+
+                        }
+                        else
+                        {
+                            Log.d(TAG,text);
+                            Snackbar.make(linearLayout,"Update unsuccessful"+text,Snackbar.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+
+
+                }
+                else {
+                    String s="";
+                    try {
+                        if (response.errorBody() != null) {
+                            s=response.errorBody().string();
+                            Log.e("Insertion","Error body is "+s);
+
+                        }
+                        else
+                        {
+                            Log.e("Insertion","Error body is null");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CallResult> call, Throwable t) {
+
+                Toast.makeText(ProfilePage.this, "Insert Call failed", Toast.LENGTH_SHORT).show();
+                Log.e("Insert", t.getMessage());
+            }
+
+        });
 
     }
 
@@ -380,7 +466,7 @@ public class ProfilePage extends AppCompatActivity {
                         else
                         {
                             Snackbar.make(linearLayout,"Saved unsuccessful"+text,Snackbar.LENGTH_SHORT).show();
-
+                            Log.e("Insertion","Error body is "+text);
                         }
                     }
 
@@ -457,6 +543,7 @@ public class ProfilePage extends AppCompatActivity {
                             editor.apply();
 
                             startActivity(new Intent(ProfilePage.this,Home.class));
+                            finish();
 
                         } else {
                             Log.e("Selection", "Success is false");
@@ -571,6 +658,9 @@ public class ProfilePage extends AppCompatActivity {
 
 
                     Log.d(TAG, "File Uri: " + uri.toString());
+
+
+
 
                     // Get the path
                     String path = null;

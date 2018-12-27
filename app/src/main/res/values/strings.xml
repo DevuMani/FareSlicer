@@ -17,6 +17,7 @@
     <string name="tab_groups">Groups</string>
     <string name="no_transaction_found">No transaction found</string>
     <string name="Rs">\u20B9</string>
+    <string name="currency">\u20B9</string>
     <string name="group_members_heading">Members :</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="fare_slicing_mode">Fare Slicing Mode:</string>
@@ -29,5 +30,26 @@
 
     <string name="radio_enable">Enable</string>
     <string name="radio_disable">Disable</string>
+    <string name="set_password">Set password</string>
+    <string name="old_password">Old password</string>
+    <string name="enter_password">Enter Password</string>
+
+    <string name="total_balance">Total Balance</string>
+    <string name="you_are_all_settled_up">You are all settled up</string>
+    <string name="settled_up_text">Settled up</string>
+
+
+    <string name="individual_owe_text">you owe</string>
+    <string name="individual_own_text">you own</string>
+
+    <string name="group_owe_text">to group</string>
+    <string name="group_own_text">from group</string>
+
+    <string name="home_group_own_text">from group(s)</string>
+    <string name="home_group_owe_text">to group(s)</string>
+
+    <string name="home_individual_own_text">from group(s)</string>
+    <string name="home_individual_owe_text">to group(s)</string>
+
 
 </resources>

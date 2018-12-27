@@ -16,5 +16,8 @@
     <color name="background_shade2">#EEEEEE</color>
     <color name="background_shade3">#F5F5F5</color>
     <color name="navy_blue">#0065FF</color>                  <!--navy_blue-->
+    <color name="warning_red">#B33A3A</color>
+    <color name="text_grey">#A9A9A9</color>                  <!--navy_blue-->
+
 
 </resources>

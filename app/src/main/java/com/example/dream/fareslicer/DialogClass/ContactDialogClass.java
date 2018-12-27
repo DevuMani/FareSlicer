@@ -3,18 +3,24 @@ package com.example.dream.fareslicer.DialogClass;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.example.dream.fareslicer.Activities.EditGroup;
+import com.example.dream.fareslicer.Activities.NewGroup;
 import com.example.dream.fareslicer.AdapterClasses.ContactListAdapter;
 import com.example.dream.fareslicer.BeanClasses.ContactData;
 import com.example.dream.fareslicer.R;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +30,7 @@ public class ContactDialogClass extends Dialog {
     ProgressBar progressBar;
     RecyclerView recyclerView;
     ContactListAdapter adapter;
+    String pageType=""; // to know from where this call is coming edit or new group
 
     Context context;
 
@@ -31,10 +38,11 @@ public class ContactDialogClass extends Dialog {
     ContactData contactData;
     private LinearLayoutManager linearLayoutManager;
 
-    public ContactDialogClass(Context context) {
+    public ContactDialogClass(Context context, String pageType) {
         super(context);
 
         this.context=context;
+        this.pageType=pageType;
     }
 
     @Override
@@ -43,16 +51,34 @@ public class ContactDialogClass extends Dialog {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_contact_list);
+//        Toast.makeText(context, "Loding....", Toast.LENGTH_SHORT).show();
 
         initView();
-
-
-
         setRecyclerViewData();
 
+
+    }
+        /**
+     * dialog close listener
+     * @param dialogClass
+     */
+    public void setMyDialogListener(ContactDialogClass dialogClass)
+    {
+        dialogClass.setOnDismissListener(new OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+
+                NewGroup.member_progress_bar.setVisibility(View.GONE);
+                Toast.makeText(context, "Dissmissed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
+    @Override
+    public void onBackPressed() {
 
+        dismiss();
+    }
 
     private void initView() {
 
@@ -67,7 +93,7 @@ public class ContactDialogClass extends Dialog {
         contact_list= new ArrayList<>();
         loadContacts();
         linearLayoutManager=new LinearLayoutManager(context);
-        adapter = new ContactListAdapter(context, contact_list,this);
+        adapter = new ContactListAdapter(context, contact_list,this,pageType);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
         progressBar.setVisibility(View.GONE);
@@ -100,6 +126,7 @@ public class ContactDialogClass extends Dialog {
                     while (cursor1.moveToNext()) {
                         String phoneNumber = cursor1.getString(cursor1.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
+
                         contactData.setName(name);
                         contactData.setNumber(phoneNumber);
                         contact_list.add(contactData);
@@ -112,4 +139,6 @@ public class ContactDialogClass extends Dialog {
         }
         cursor.close();
     }
+
+
 }

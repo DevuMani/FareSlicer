@@ -83,23 +83,18 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         phone.setText(header_phone);
         email.setText(header_email);
 
-
         String path= Environment.getExternalStorageDirectory() + File.separator + "FareSlicer"+ File.separator +fileName;
 
         if(fileName.equals("")) {
 
-            Random rnd = new Random();
-            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-            image.setBackgroundColor(color);
-//                imageview.setBackgroundColor(0xff00ff00);
+            image.setImageDrawable(getDrawable(R.drawable.ic_user));
+
         } else {
             Bitmap bitmap = BitmapFactory.decodeFile(path);
 
 //            Toast.makeText(this, ""+bitmap, Toast.LENGTH_SHORT).show();
             image.setImageBitmap(bitmap);
         }
-
-
     }
 
     //  Tab layout
@@ -184,8 +179,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     }
 
-    public void setPermission()
-    {
+    public void setPermission() {
         try {
             PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_PERMISSIONS);
             if (info.requestedPermissions != null) {
@@ -194,6 +188,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     permissions.add(p);
                 }
 
+                if(!permissions.isEmpty())
                 checkWriteExternalPermission(permissions);
             }
         } catch (Exception e) {
@@ -201,8 +196,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }
     }
 
-    private void checkWriteExternalPermission(ArrayList<String> permission)
-    {
+    private void checkWriteExternalPermission(ArrayList<String> permission) {
         ArrayList<String> notgranted =new ArrayList<>();
 
         for(int i=0;i<permission.size();i++) {
@@ -283,7 +277,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 startActivity(notification_intent);
                 break;
             case R.id.menu_passcode:
-                Toast.makeText(this, "Clicked Passcode", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Clicked Passcode", Toast.LENGTH_SHORT).show();
                 SharedPreferences sp=getSharedPreferences("User",Context.MODE_PRIVATE);
                 Boolean pass=sp.getBoolean("Password",false);
                 if(pass==true)
@@ -338,7 +332,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                         Intent intent=new Intent(Home.this,PasswordSettingScreen.class);
                         intent.putExtra("from","clear");
                         startActivity(intent);
-                        Toast.makeText(Home.this, "Clear password", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Home.this, "Clear password", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -370,7 +364,21 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 }
                 break;
             case R.id.menu_log_out:
-                Toast.makeText(this, "Clicked Log out", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Clicked Log out", Toast.LENGTH_SHORT).show();
+
+                SharedPreferences sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putString("user_id","");
+                editor.putString("user_name","");
+                editor.putString("user_phno","");
+                editor.putString("user_email","");
+                editor.putString("user_photo","");
+                editor.putString("user_currency","set");
+                editor.apply();
+                Intent intent1=new Intent(Home.this,SplashScreen.class);
+                startActivity(intent1);
+                finish();
+
                 break;
 
         }

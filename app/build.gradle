@@ -21,13 +21,13 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.1.0-alpha01'
+    implementation 'com.google.android.material:material:1.1.0-alpha02'
     implementation 'androidx.media:media:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.facebook.android:account-kit-sdk:4.+'
     //    implementation 'com.squareup.picasso:picasso:2.5.2'
     //    implementation 'com.squareup.picasso:picasso:2.6.0-SNAPSHOT'
@@ -39,5 +39,11 @@ dependencies {
     //Currency picker
     implementation 'com.github.midorikocak:currency-picker-android:1.1.9'
     //PassCode View
+
+    //Progressbar in square shape
+    implementation 'ch.halcyon:squareprogressbar:1.6.4'
+
+    //Card view
+    implementation 'androidx.cardview:cardview:1.0.0'
 
 }

@@ -1,4 +1,4 @@
-package com.example.dream.fareslicer.RetrofitInputOutputClasses;
+package com.example.dream.fareslicer.RetrofitInputOutputClasses.CommonInputOutputClasses;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

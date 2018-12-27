@@ -42,7 +42,7 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
             case 1:
 
 
-                GroupFragment groupFragment=new GroupFragment();
+                 GroupFragment groupFragment=new GroupFragment();
 
                 return groupFragment;
 

@@ -5,144 +5,212 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_totalLayout"
     >
 
-
-    <LinearLayout
-        android:id="@+id/home_transaction_heading_layout"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/home_swiperefresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        >
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/linear_head_image"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chart"
-                android:textColor="@color/Black"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_head_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="@color/Black"
-                    android:text="Total"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="@color/Black"
-                    android:text="They owe you "/>
-
-                <TextView
-                    android:id="@+id/owe_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/Black"
-                    android:textSize="20sp"
-                    android:text="Amount"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="@color/Black"
-                    android:text="You owe them "/>
-
-                <TextView
-                    android:id="@+id/amount_own"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/Black"
-                    android:textSize="20sp"
-                    android:text="Amount"
-                    />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/navy_blue"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/home_progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/home_transaction_heading_layout"
-        android:layout_centerHorizontal="true"/>
-
-    <LinearLayout
-        android:id="@+id/home_transaction_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/home_progressBar"
-        >
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/home_recyclerView"
+        <RelativeLayout
+            android:id="@+id/main_Layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp">
+            >
 
-        </androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/home_transaction_heading_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                >
+
+                <LinearLayout
+                    android:id="@+id/linear_head_image"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ch.halcyon.squareprogressbar.SquareProgressBar
+                        android:id="@+id/sprogressbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+                    </ch.halcyon.squareprogressbar.SquareProgressBar>
+
+                    <TextView
+                        android:id="@+id/home_total_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chart"
+                        android:textColor="@color/Black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_head_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/total_text_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/total_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="@color/Black"
+                            android:text="@string/total_balance"/>
+                        <TextView
+                            android:id="@+id/total_currency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="@color/Black"
+                            android:text=" $ "/>
+                        <TextView
+                            android:id="@+id/total_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/Black"
+                            android:textSize="20sp"
+                            android:text="0"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/all_settled_up"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="@color/caribbean_green"
+                            android:text="@string/you_are_all_settled_up"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_you_owe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="@color/warning_red"
+                            android:text="@string/home_group_owe_text"/>
+                        <TextView
+                            android:id="@+id/home_heading_owe_currency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="@color/warning_red"
+                            android:text=" $ "/>
+                        <TextView
+                            android:id="@+id/owe_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/warning_red"
+                            android:textSize="20sp"
+                            android:text="0"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_you_own"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="@color/caribbean_green"
+                            android:text="@string/home_group_own_text"/>
+                        <TextView
+                            android:id="@+id/home_heading_own_currency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="@color/caribbean_green"
+                            android:text=" $ "/>
+                        <TextView
+                            android:id="@+id/own_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/caribbean_green"
+                            android:textSize="20sp"
+                            android:text="0"
+                            />
+                    </LinearLayout>
 
 
 
-    <LinearLayout
-        android:id="@+id/home_no_transaction_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        >
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/navy_blue"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/nodata"
-            android:layout_gravity="center"
-            android:contentDescription="No Data" />
+                </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/no_transaction_found"/>
-    </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/home_transaction_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/home_transaction_heading_layout"
+                >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="10dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/home_no_transaction_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/nodata"
+                    android:layout_gravity="center"
+                    android:contentDescription="No Data" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_transaction_found"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
 </RelativeLayout>

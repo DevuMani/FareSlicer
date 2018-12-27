@@ -3,6 +3,7 @@ package com.example.dream.fareslicer.AdapterClasses;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,19 +13,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dream.fareslicer.Activities.EditGroup;
+import com.example.dream.fareslicer.Activities.NewGroup;
 import com.example.dream.fareslicer.BeanClasses.ContactData;
 import com.example.dream.fareslicer.DialogClass.ContactDialogClass;
 import com.example.dream.fareslicer.Interface.ContactSetter;
-import com.example.dream.fareslicer.Activities.NewGroup;
 import com.example.dream.fareslicer.R;
 import com.example.dream.fareslicer.RetrofitClientAndInterface.RetrofitClient;
-import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallOutput;
-import com.example.dream.fareslicer.RetrofitInputOutputClasses.CallResult;
-import com.example.dream.fareslicer.RetrofitInputOutputClasses.QueryValue;
+import com.example.dream.fareslicer.RetrofitInputOutputClasses.CommonInputOutputClasses.CallOutput;
+import com.example.dream.fareslicer.RetrofitInputOutputClasses.CommonInputOutputClasses.CallResult;
+import com.example.dream.fareslicer.RetrofitInputOutputClasses.CommonInputOutputClasses.QueryValue;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,12 +44,14 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     private Context mContext;
     private ArrayList<ContactData> contactList;
-    ContactDialogClass contactDialogClass;
+//    ContactDialogClass contactDialogClass;
+    private String pageType="";// to know from where this call is coming edit or new group
 
-    public ContactListAdapter(Context context, ArrayList<ContactData> contact_list, ContactDialogClass contactDialogClass) {
+    public ContactListAdapter(Context context, ArrayList<ContactData> contact_list, ContactDialogClass contactDialogClass, String pageType) {
         mContext=context;
         contactList=contact_list;
-        this.contactDialogClass=contactDialogClass;
+//        this.contactDialogClass=contactDialogClass;
+        this.pageType=pageType;
     }
 
     @Override
@@ -97,9 +102,13 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             if(view == layout)
             {
                 ContactData c_data= contactList.get(getAdapterPosition());
-                Toast.makeText(mContext, "Name : "+c_data.getName(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "Name : "+c_data.getName(), Toast.LENGTH_SHORT).show();
 
                 selectCall(c_data.getName(),c_data.getNumber());
+
+
+
+
 
 //                if(b==true)
 //                {
@@ -126,6 +135,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                 //                Toast.makeText(mContext, "Dataa:::"+String.valueOf(iconList.get(getItemCount())), Toast.LENGTH_SHORT).show();
             }
         }
+
 
         private void showAlertDialog() {
 
@@ -156,9 +166,9 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         }
         private void selectCall(final String name, final String number) {
 
-            String query="select user_id from tb_user where user_phno=?";
+            String query="select user_id from tb_user where user_phno like ? ";
             ArrayList<String> value=new ArrayList();
-            value.add(number);
+            value.add("%"+number.replaceAll("\\s",""));
 
             QueryValue queryValue=new QueryValue();
             queryValue.setQuery(query);
@@ -184,18 +194,41 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
                                 List<CallOutput> output = selectResult.getOutput();
 
-                                CallOutput item = output.get(0);
-                                List<String> list=item.getValue();
-                                String id=list.get(0);
+                                if(output.size()==1) {
 
-                                if(!id.equalsIgnoreCase(""))
-                                {
-                                    ContactSetter contactSetter=NewGroup.newGroup;
-                                    contactSetter.setContact(id,name,number);
-                                    contactDialogClass.dismiss();
+                                    CallOutput item = output.get(0);
 
+                                    List<String> list = item.getValue();
+                                    String id = list.get(0);
+
+                                    if (!id.equalsIgnoreCase("")) {
+
+                                        SharedPreferences sp=mContext.getSharedPreferences("User",Context.MODE_PRIVATE);
+                                        String user_id=sp.getString("user_id","");
+                                        if(id.equalsIgnoreCase(user_id))
+                                        {
+                                            Toast.makeText(mContext, "This is your number", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else {
+
+//                                            if (pageType.equalsIgnoreCase("add")) {
+//                                                ContactSetter contactSetter = NewGroup.newGroup;
+//                                                contactSetter.setContact(id, name, number);
+//
+////                                                contactDialogClass.dismiss();
+//                                            } else
+                                                if (pageType.equalsIgnoreCase("edit")) {
+                                                ContactSetter contactSetter = EditGroup.editGroup;
+                                                contactSetter.setContact(id, name, number);
+//                                                contactDialogClass.dismiss();
+                                            }
+                                        }
+                                    }
                                 }
-
+                                else
+                                {
+                                    Toast.makeText(mContext, "Number Not found", Toast.LENGTH_SHORT).show();
+                                }
 
                             } else {
                                 Log.e("Selection", "Success is false");
