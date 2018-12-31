@@ -25,6 +25,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +35,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dream.fareslicer.DialogClass.AmountPayClass;
 import com.example.dream.fareslicer.R;
 import com.example.dream.fareslicer.RetrofitClientAndInterface.RetrofitClient;
 import com.example.dream.fareslicer.RetrofitInputOutputClasses.CommonInputOutputClasses.CallOutput;
@@ -409,6 +412,13 @@ public class NotificationActivity extends AppCompatActivity implements Navigatio
                 notification_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(notification_intent);
 
+                break;
+            case R.id.menu_pay:
+                Toast.makeText(this, "Clicked g-pay", Toast.LENGTH_SHORT).show();
+                AmountPayClass cd=new AmountPayClass(NotificationActivity.this);
+                Window window = cd.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                cd.show();
                 break;
             case R.id.menu_passcode:
 //                Toast.makeText(this, "Clicked Passcode", Toast.LENGTH_SHORT).show();

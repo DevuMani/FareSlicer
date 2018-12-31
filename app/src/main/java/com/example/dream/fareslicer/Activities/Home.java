@@ -26,12 +26,15 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.dream.fareslicer.AdapterClasses.HomePagerAdapter;
+import com.example.dream.fareslicer.DialogClass.AmountPayClass;
 import com.example.dream.fareslicer.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -276,6 +279,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 notification_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(notification_intent);
                 break;
+
+            case R.id.menu_pay:
+                Toast.makeText(this, "Clicked g-pay", Toast.LENGTH_SHORT).show();
+                AmountPayClass cd=new AmountPayClass(Home.this);
+                Window window = cd.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                cd.show();
+                break;
+
             case R.id.menu_passcode:
 //                Toast.makeText(this, "Clicked Passcode", Toast.LENGTH_SHORT).show();
                 SharedPreferences sp=getSharedPreferences("User",Context.MODE_PRIVATE);

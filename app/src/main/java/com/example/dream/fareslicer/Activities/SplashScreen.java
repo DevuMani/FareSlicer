@@ -85,7 +85,7 @@ public class SplashScreen extends AppCompatActivity {
                         Intent mainIntent = new Intent(SplashScreen.this, RegistrationActivity.class);
                         SplashScreen.this.startActivity(mainIntent);
                         SplashScreen.this.finish();
-//                    progressBar.setVisibility(View.GONE);
+//                    expenseList_progressBar.setVisibility(View.GONE);
 
                     }
                 }
@@ -134,24 +134,24 @@ public class SplashScreen extends AppCompatActivity {
         thread.start();
     }
 
-
-    private void contactInsert() {
-
-        //thread is used to give delay and set value accordingly
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                //Called to insert contacts from phone to app database
-                Intent intent = new Intent(SplashScreen.this, MyContactService.class);
-                startService(intent);
-
-
-            }
-        });
-        thread.start();
-
-
-    }
+//
+//    private void contactInsert() {
+//
+//        //thread is used to give delay and set value accordingly
+//        Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                //Called to insert contacts from phone to app database
+//                Intent intent = new Intent(SplashScreen.this, MyContactService.class);
+//                startService(intent);
+//
+//
+//            }
+//        });
+//        thread.start();
+//
+//
+//    }
 
 }

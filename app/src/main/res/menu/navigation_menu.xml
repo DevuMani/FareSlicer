@@ -12,6 +12,12 @@
             android:id="@+id/menu_notification"
             android:title="@string/menu_notification"
             android:icon="@drawable/menu_notification_icon"/>
+
+        <item
+            android:id="@+id/menu_pay"
+            android:title="Pay using gpay"
+            android:icon="@drawable/menu_pay"/>
+
         <item
             android:id="@+id/menu_passcode"
             android:title="@string/menu_passcode"

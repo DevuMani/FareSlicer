@@ -93,7 +93,7 @@ public class ExpenseActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        Intent intent=new Intent(this,ExpenseListView.class);
+        Intent intent=new Intent(this,GroupActivity.class);
         intent.putExtra("g_id",g_id);
         intent.putExtra("g_name",g_name);
         startActivity(intent);

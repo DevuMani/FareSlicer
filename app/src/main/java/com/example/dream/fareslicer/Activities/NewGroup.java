@@ -50,17 +50,17 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
 
     private static final String TAG ="New Group" ;
     private static final int REQUEST_CODE = 0;
+
     private EditText group_name;
     private LinearLayout add_members;
     private RecyclerView member_recyclerView;
     private Button save;
 
-    public static NewGroup newGroup =new NewGroup();
+    public static NewGroup newGroup =new NewGroup();//remove
 
     String selected_user_id=""; //To know which user is selected
     String selected_name="";    //To know selected user's name
     String selected_number="";  // To know selected user's number
-
     static ArrayList<MemberData> member_list=new ArrayList<>();
 
     MemberData memberData;
@@ -97,13 +97,6 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
 
         initRecyclerView();
 
-//        group_id=getIntent().getStringExtra("g_id");
-//
-//        if(!group_id.equalsIgnoreCase(""))
-//        {
-////            dataFillCall();
-//        }
-
 //        currency_chooser.setOnClickListener(this);
         add_members.setOnClickListener(this);
         save.setOnClickListener(this);
@@ -111,7 +104,6 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
         group_name.addTextChangedListener(myTextChangeListener);
 
     }
-
 
     public TextWatcher myTextChangeListener=new TextWatcher() {
         @Override
@@ -134,8 +126,6 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
             if(!g_name.equals(""))
             {
 
-//member list is passed only because the call need this member list and it is not used in that function if check is true
-//                    selectGroupId(g_name,"true");
                 checkGroupName("check");
 
             }
@@ -145,7 +135,6 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
                 Log.d(TAG,"Enter group name");
 
             }
-
         }
     };
 
@@ -178,7 +167,6 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
         member_recyclerView=findViewById(R.id.group_recycler_view);
         save=findViewById(R.id.group_save);
 
-
     }
 
     private void initRecyclerView() {
@@ -201,7 +189,6 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
     }
 
 
-
     //To add the selected people to this page
     private void setMemberDataList(String selected_user_id, String selected_name, String selected_number) {
 
@@ -216,180 +203,6 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
 
         adapter.notifyDataSetChanged();
     }
-
-//    remove
-
-//    //This function is used to fill data corresponding to group_id
-
-
-
-//    private void dataFillCall() {
-//
-//        String query="select group_name,group_currency from tb_group where group_id=?";
-//        ArrayList<String> value=new ArrayList();
-//        value.add(group_id);
-//
-//        QueryValue queryValue=new QueryValue();
-//        queryValue.setQuery(query);
-//        queryValue.setValue(value);
-//
-//        Call<CallResult> call= RetrofitClient.getInstance().getApi().select(queryValue);
-//
-//        call.enqueue(new Callback<CallResult>() {
-//            @Override
-//            public void onResponse(Call<CallResult> call, Response<CallResult> response) {
-//
-//
-//                if(response.code()==200) {
-//
-//                    CallResult selectResult = response.body();
-//
-//                    String success = "";
-//                    if (selectResult != null) {
-//                        success = selectResult.getStatus();
-//
-//                        if (success.equalsIgnoreCase("true")) {
-//
-//                            List<CallOutput> output = selectResult.getOutput();
-//
-//                            CallOutput item = output.get(0);
-//                            List<String> list=item.getValue();
-//                            String g_name=list.get(0);
-//                            String g_currency=list.get(1);
-//
-//                            group_name.setText(g_name);
-//                            group_currency.setText(g_currency);
-//
-//                            membersSelectCall();
-//
-//
-//                        }
-//                        else
-//                        {
-//                            Snackbar.make(linearLayout,success,Snackbar.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                    else
-//                    {
-//                        Log.e("NewGroup Selection","Response body is null");
-//                    }
-//                }
-//                else
-//                {
-//                    String s="";
-//                    try {
-//                        if (response.errorBody() != null) {
-//                            s=response.errorBody().string();
-//                            Log.e("NewGroup Selection","Error body is "+s);
-//                        }
-//                        else
-//                        {
-//                            Log.e("NewGroup Selection","Error body is null");
-//                        }
-//                    } catch (IOException e) {
-//                        Log.e("NewGroup Selection",e.getMessage());
-//
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<CallResult> call, Throwable t) {
-//
-//                Log.e("NewGroup Selection",t.getMessage());
-//            }
-//        });
-//    }
-//
-//    //This function fetches user_id and user_name members in corresponding group_id
-//    private void membersSelectCall() {
-//
-//        String query="select t1.user_id,t2.user_name from tb_member t1, tb_user t2 where t2.user_id=t1.user_id and t1.group_id=?";
-//        ArrayList<String> value=new ArrayList();
-//        value.add(group_id);
-//
-//        QueryValue queryValue=new QueryValue();
-//        queryValue.setQuery(query);
-//        queryValue.setValue(value);
-//
-//        member_list.clear();
-//
-//        Call<CallResult> call= RetrofitClient.getInstance().getApi().select(queryValue);
-//
-//        call.enqueue(new Callback<CallResult>() {
-//            @Override
-//            public void onResponse(Call<CallResult> call, Response<CallResult> response) {
-//
-//                if(response.code()==200) {
-//
-//                    CallResult selectResult=response.body();
-//
-//                    String success= "";
-//                    if (selectResult != null) {
-//                        success = selectResult.getStatus();
-//
-//                        if (success.equalsIgnoreCase("true")) {
-//
-//                            List<CallOutput> output = selectResult.getOutput();
-//
-//
-//
-//                            for (int i=0;i<output.size();i++)
-//                            {
-//                                CallOutput item = output.get(i);
-//                                List<String> list=item.getValue();
-//
-//                                String user_id=list.get(0);
-//                                String user_name=list.get(1);
-//
-//                                memberData=new MemberData();
-//                                memberData.setSelected_user_id(user_id);
-//                                memberData.setSelected_name(user_name);
-//
-//                                member_list.add(memberData);
-//
-//                            }
-//
-//                            adapter.notifyDataSetChanged();
-//
-//
-//                        } else {
-//                            Log.e("NewGroup Selection", "Success is false");
-//                        }
-//                    }
-//                    else
-//                    {
-//                        Log.e("NewGroup Selection", "Success is null ");
-//                    }
-//
-//                }
-//                else {
-//                    String s="";
-//                    try {
-//                        if (response.errorBody() != null) {
-//                            s=response.errorBody().string();
-//                            Log.e("NewGroup Selection","Error body is "+s);
-//                        }
-//                        else
-//                        {
-//                            Log.e("NewGroup Selection","Error body is null");
-//                        }
-//                    } catch (IOException e) {
-//                        Log.e("NewGroup Selection",e.getMessage());
-//
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<CallResult> call, Throwable t) {
-//
-//                Toast.makeText(NewGroup.this, "Selection Call failed", Toast.LENGTH_SHORT).show();
-//                Log.e("NewGroup Selection", t.getMessage());
-//            }
-//
-//        });
-//    }
 
     private void saveFunction() {
 
@@ -409,10 +222,15 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
     //if check is true ,we don't use this member list in this function
     private void checkGroupName(final String function) {
 
+        SharedPreferences sp=getSharedPreferences("User",MODE_PRIVATE);
+        String user_id=sp.getString("user_id","");
+
         String g_name=group_name.getText().toString();
-        String query="select group_id from tb_group where group_name=?";
+
+        String query="select group_id from tb_group where group_name=? and user_id=?";
         ArrayList<String> value=new ArrayList();
         value.add(g_name);
+        value.add(user_id);
 
         QueryValue queryValue=new QueryValue();
         queryValue.setQuery(query);
@@ -553,7 +371,6 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
         });
     }
 
-
     private void selectGroupId(String g_name) {
 
         SharedPreferences sp=getSharedPreferences("User",MODE_PRIVATE);
@@ -652,82 +469,6 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
         });
     }
 
-
-//    remove
-
-
-//    private void updateGroupCall(String user_id, String g_name, String g_currency, String date) {
-//
-//        String query="update tb_group set group_name=?,group_currency=?,user_id=?,group_date_created=? where group_id=?";
-//        ArrayList<String> value=new ArrayList();
-//
-//        value.add(g_name);
-//        value.add(g_currency);
-//        value.add(user_id);
-//        value.add(date);
-//        value.add(group_id);
-//
-//        QueryValue queryValue=new QueryValue();
-//        queryValue.setQuery(query);
-//        queryValue.setValue(value);
-//
-//        Call<CallResult> call=RetrofitClient.getInstance().getApi().insert(queryValue);
-//
-//        call.enqueue(new Callback<CallResult>() {
-//            @Override
-//            public void onResponse(Call<CallResult> call, Response<CallResult> response) {
-//                if(response.code()==200) {
-//
-//                    CallResult selectResult = response.body();
-//
-//                    String success = "";
-//                    if (selectResult != null) {
-//                        success = selectResult.getStatus();
-//
-//                        if (success.equalsIgnoreCase("true")) {
-//
-//                            insertMembersCall(group_id);
-//
-//                        }
-//                        else
-//                        {
-//                            Log.e(TAG,success);
-//                            Snackbar.make(linearLayout,"Updation Failed",Snackbar.LENGTH_LONG).show();
-//                        }
-//                    }
-//                    else
-//                    {
-//                        Log.e(TAG,selectResult.toString());
-//                        Snackbar.make(linearLayout,"Updation Failed",Snackbar.LENGTH_LONG).show();
-//
-//                    }
-//                }
-//                else
-//                {
-//                    String s="";
-//                    try {
-//                        if (response.errorBody() != null) {
-//                            s=response.errorBody().string();
-//                            Log.e("NewGroup updation","Error body is "+s);
-//                        }
-//                        else
-//                        {
-//                            Log.e("NewGroup updation","Error body is null");
-//                        }
-//                    } catch (IOException e) {
-//                        Log.e("NewGroup updation",e.getMessage());
-//
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<CallResult> call, Throwable t) {
-//                Log.e("NewGroup updation", t.getMessage());
-//            }
-//        });
-//    }
-
     private void insertMembersCall(String groupId) {
 
         for (int i = 0; i < member_list.size(); i++) {
@@ -799,7 +540,6 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
                     Log.e("NewGroup insertion", t.getMessage());
                 }
             });
-
         }
     }
 
@@ -813,11 +553,9 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
 //            memberAddDialog();
 
 
-
             Intent intent=new Intent(NewGroup.this,ContactListActivity.class);
             intent.putExtra("pageType","add");
             startActivityForResult(intent,REQUEST_CODE);
-
 
         }
         else if(view==save)
@@ -825,8 +563,6 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
             checkGroupName("save");
         }
     }
-
-
 
     private void memberAddDialog() {
 
@@ -842,7 +578,6 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
         contactDialogClass.setCanceledOnTouchOutside(true);
 
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -863,6 +598,7 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
+    //remove
 //    @Override
 //    public void setContact(String id, String name, String number) {
 //
@@ -875,4 +611,5 @@ public class NewGroup extends AppCompatActivity implements View.OnClickListener 
 //        setMemberDataList(selected_user_id,selected_name,selected_number);
 //
 //    }
+
 }

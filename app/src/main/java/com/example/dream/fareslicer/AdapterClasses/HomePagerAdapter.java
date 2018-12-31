@@ -29,22 +29,16 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-
-        Bundle bundle=new Bundle();
         switch (position) {
             case 0:
 
-
                 TransactionFragment transactionFragment=new TransactionFragment();
-
                 return transactionFragment;
 
             case 1:
 
-
                  GroupFragment groupFragment=new GroupFragment();
-
-                return groupFragment;
+                 return groupFragment;
 
 
             default:

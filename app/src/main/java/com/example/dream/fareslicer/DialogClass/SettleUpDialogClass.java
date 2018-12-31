@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
@@ -116,6 +117,12 @@ public class SettleUpDialogClass extends Dialog implements View.OnClickListener 
         et_amount.addTextChangedListener(myTextWatcher);
 
         save.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
     }
 
     private void initView() {

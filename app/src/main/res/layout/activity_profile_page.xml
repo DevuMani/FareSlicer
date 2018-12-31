@@ -51,6 +51,7 @@
             android:dividerHeight="0.0px"
             android:clipToPadding="false"
             android:clipChildren="false"
+            card_view:cardUseCompatPadding="true"
             card_view:cardElevation="3dp"
             card_view:cardPreventCornerOverlap="false">
 

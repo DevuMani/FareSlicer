@@ -50,6 +50,7 @@
 
     <string name="home_individual_own_text">from group(s)</string>
     <string name="home_individual_owe_text">to group(s)</string>
+    <string name="expense_list">Expense List</string>
 
 
 </resources>

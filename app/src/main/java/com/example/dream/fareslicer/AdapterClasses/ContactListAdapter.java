@@ -217,11 +217,11 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 //
 ////                                                contactDialogClass.dismiss();
 //                                            } else
-                                                if (pageType.equalsIgnoreCase("edit")) {
-                                                ContactSetter contactSetter = EditGroup.editGroup;
-                                                contactSetter.setContact(id, name, number);
-//                                                contactDialogClass.dismiss();
-                                            }
+//                                                if (pageType.equalsIgnoreCase("edit")) {
+//                                                ContactSetter contactSetter = EditGroup.editGroup;
+//                                                contactSetter.setContact(id, name, number);
+////                                                contactDialogClass.dismiss();
+//                                            }
                                         }
                                     }
                                 }
