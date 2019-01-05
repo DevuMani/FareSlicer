@@ -66,7 +66,7 @@ public class ProfilePage extends AppCompatActivity {
     String user_id="";
     private ImageView currency_chooser;
     private TextView group_currency;
-
+    private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -290,6 +290,11 @@ public class ProfilePage extends AppCompatActivity {
             Snackbar.make(linearLayout,"Email id should not be empty",Snackbar.LENGTH_SHORT).show();
             save=false;
 
+        }
+        else if (tb_email.matches(emailPattern))
+        {
+            Snackbar.make(linearLayout,"Enter valid e-mail",Snackbar.LENGTH_SHORT).show();
+            save=false;
         }
         else if (tb_currency.equalsIgnoreCase("set"))
         {

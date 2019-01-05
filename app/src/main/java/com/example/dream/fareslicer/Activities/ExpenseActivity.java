@@ -94,8 +94,8 @@ public class ExpenseActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         Intent intent=new Intent(this,GroupActivity.class);
-        intent.putExtra("g_id",g_id);
-        intent.putExtra("g_name",g_name);
+        intent.putExtra("group_id",g_id);
+        intent.putExtra("group_name",g_name);
         startActivity(intent);
         finish();
 
@@ -117,7 +117,6 @@ public class ExpenseActivity extends AppCompatActivity {
         text_user_name=findViewById(R.id.expense_added_user);
         text_amount=findViewById(R.id.expense_amount);
         expense_share=findViewById(R.id.expense_list_share);
-
 
     }
 

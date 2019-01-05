@@ -72,7 +72,7 @@ public class SplashScreen extends AppCompatActivity {
                     if (!userID.equals("")) {
 
                         if (pass == true) {
-                            Intent mainIntent = new Intent(SplashScreen.this, PasswordSettingScreen.class);
+                            Intent mainIntent = new Intent(SplashScreen.this, AppLockScreen.class);
                             mainIntent.putExtra("from", "splash");
                             SplashScreen.this.startActivity(mainIntent);
                             SplashScreen.this.finish();

@@ -69,7 +69,7 @@ public class ContactDialogClass extends Dialog {
             public void onDismiss(DialogInterface dialogInterface) {
 
                 NewGroup.member_progress_bar.setVisibility(View.GONE);
-                Toast.makeText(context, "Dissmissed", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Dissmissed", Toast.LENGTH_SHORT).show();
             }
         });
     }

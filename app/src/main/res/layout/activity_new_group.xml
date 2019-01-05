@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="30sp"
                     android:textColor="#9455ED"
-                    android:text="Add members"/>
+                    android:text="Members"/>
 
             </LinearLayout>
 
@@ -81,14 +81,15 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight=".5">
 
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/add_person" />
+                    app:srcCompat="@drawable/add_person"
+                    android:layout_gravity="center"/>
 
             </LinearLayout>
 

@@ -397,7 +397,7 @@ public class NotificationActivity extends AppCompatActivity implements Navigatio
 
         switch(id){
             case R.id.menu_home:
-                Toast.makeText(this, "Clicked home", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Clicked home", Toast.LENGTH_SHORT).show();
 
                 Intent intent=new Intent(NotificationActivity.this,Home.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -414,7 +414,7 @@ public class NotificationActivity extends AppCompatActivity implements Navigatio
 
                 break;
             case R.id.menu_pay:
-                Toast.makeText(this, "Clicked g-pay", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Clicked g-pay", Toast.LENGTH_SHORT).show();
                 AmountPayClass cd=new AmountPayClass(NotificationActivity.this);
                 Window window = cd.getWindow();
                 window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -435,7 +435,7 @@ public class NotificationActivity extends AppCompatActivity implements Navigatio
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
-                            Intent intent=new Intent(NotificationActivity.this,PasswordSettingScreen.class);
+                            Intent intent=new Intent(NotificationActivity.this,AppLockScreen.class);
                             intent.putExtra("from","nav_change");
                             startActivity(intent);
 
@@ -458,7 +458,7 @@ public class NotificationActivity extends AppCompatActivity implements Navigatio
                 }
                 else
                 {
-                    Intent pass_intent=new Intent(NotificationActivity.this,PasswordSettingScreen.class);
+                    Intent pass_intent=new Intent(NotificationActivity.this,AppLockScreen.class);
                     pass_intent.putExtra("from","nav_set");
                     startActivity(pass_intent);
                 }
@@ -473,7 +473,7 @@ public class NotificationActivity extends AppCompatActivity implements Navigatio
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        Intent intent=new Intent(NotificationActivity.this,PasswordSettingScreen.class);
+                        Intent intent=new Intent(NotificationActivity.this,AppLockScreen.class);
                         intent.putExtra("from","clear");
                         startActivity(intent);
 //                        Toast.makeText(Home.this, "Clear password", Toast.LENGTH_SHORT).show();
@@ -492,7 +492,9 @@ public class NotificationActivity extends AppCompatActivity implements Navigatio
                 builder.create().show();
                 break;
             case R.id.menu_rate:
-                Toast.makeText(NotificationActivity.this, "Clicked Rate us", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(NotificationActivity.this, "Clicked Rate us", Toast.LENGTH_SHORT).show();
+
+
                 break;
             case R.id.menu_contact:
 //                Toast.makeText(NotificationActivity.this, "Clicked Contact us", Toast.LENGTH_SHORT).show();

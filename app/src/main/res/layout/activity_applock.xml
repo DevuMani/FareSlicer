@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.PasswordSettingScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/password_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+            </RelativeLayout>
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1">-->
+
+
+                <!--<TextView-->
+                    <!--android:id="@+id/password_tv"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Set password"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="25sp" />-->
+
+
+            <!--</RelativeLayout>-->
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tv_hint_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Please enter your password" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/l_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="4"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberPassword"
+                    android:textAlignment="center"
+                    android:maxLength="4"
+                    android:layout_below="@+id/tv_hint_msg"
+                    android:minHeight="60dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/forgot_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/l_password"
+                android:padding="5dp"
+                android:text="@string/forgot_your_password"
+                android:textAlignment="viewEnd" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/password_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/forgot_password"
+                android:theme="@style/MyFloatingButton"
+                android:backgroundTint="@color/caribbean_green"
+                android:src="@drawable/left_side_arrow"
+                app:fabSize="normal" />
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/password_frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+
+</LinearLayout>

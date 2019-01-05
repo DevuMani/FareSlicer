@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -265,7 +266,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         switch(id){
             case R.id.menu_home:
-                Toast.makeText(this, "Clicked home", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Clicked home", Toast.LENGTH_SHORT).show();
 
                 Intent intent=new Intent(Home.this,Home.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -281,7 +282,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
 
             case R.id.menu_pay:
-                Toast.makeText(this, "Clicked g-pay", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Clicked g-pay", Toast.LENGTH_SHORT).show();
                 AmountPayClass cd=new AmountPayClass(Home.this);
                 Window window = cd.getWindow();
                 window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -303,7 +304,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
-                            Intent intent=new Intent(Home.this,PasswordSettingScreen.class);
+                            Intent intent=new Intent(Home.this,AppLockScreen.class);
                             intent.putExtra("from","nav_change");
                             startActivity(intent);
 
@@ -326,7 +327,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 }
                 else
                 {
-                    Intent pass_intent=new Intent(Home.this,PasswordSettingScreen.class);
+                    Intent pass_intent=new Intent(Home.this,AppLockScreen.class);
                     pass_intent.putExtra("from","nav_set");
                     startActivity(pass_intent);
                 }
@@ -341,7 +342,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        Intent intent=new Intent(Home.this,PasswordSettingScreen.class);
+                        Intent intent=new Intent(Home.this,AppLockScreen.class);
                         intent.putExtra("from","clear");
                         startActivity(intent);
 //                        Toast.makeText(Home.this, "Clear password", Toast.LENGTH_SHORT).show();
@@ -360,10 +361,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 builder.create().show();
                 break;
             case R.id.menu_rate:
-                Toast.makeText(this, "Clicked Rate us", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Clicked Rate us", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu_contact:
-                Toast.makeText(this, "Clicked Contact us", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Clicked Contact us", Toast.LENGTH_SHORT).show();
+
                 Intent i = new Intent(Intent.ACTION_SENDTO);
                 i.setType("message/rfc822");
                 i.setData(Uri.parse("mailto:"));
@@ -377,6 +379,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
             case R.id.menu_log_out:
 //                Toast.makeText(this, "Clicked Log out", Toast.LENGTH_SHORT).show();
+
 
                 SharedPreferences sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
                 SharedPreferences.Editor editor=sharedPreferences.edit();

@@ -5,6 +5,7 @@
 
     <string name="FACEBOOK_APP_ID">570771760026777</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">78dd7a421f95d41d353b68b97b697854</string>
+
     <string name="menu_home">Home</string>
     <string name="menu_notification">Notification</string>
     <string name="menu_passcode">Passcode</string>
@@ -13,44 +14,52 @@
     <string name="menu_log_out">Log Out</string>
     <string name="navigation_drawer_open">Open Drawer</string>
     <string name="navigation_drawer_close">Close Drawer</string>
+
     <string name="tab_transaction">All transaction</string>
     <string name="tab_groups">Groups</string>
+
     <string name="no_transaction_found">No transaction found</string>
+
     <string name="Rs">\u20B9</string>
     <string name="currency">\u20B9</string>
+
     <string name="group_members_heading">Members :</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="fare_slicing_mode">Fare Slicing Mode:</string>
+
+    <string name="fare_slicing_mode">Sharing Mode:</string>
     <string name="share_among">Share among:</string>
     <string name="share_percentage_symbol">%</string>
     <string name="share_text">share(s)</string>
+
     <string name="email_notifications_text">Email Notifications</string>
     <string name="mobile_notifications_text">Mobile Notifications</string>
     <string name="all_notifications_text">All Notifications</string>
 
     <string name="radio_enable">Enable</string>
     <string name="radio_disable">Disable</string>
+
     <string name="set_password">Set password</string>
     <string name="old_password">Old password</string>
     <string name="enter_password">Enter Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="forgot_your_password">Forgot Your Password ??</string>
 
     <string name="total_balance">Total Balance</string>
     <string name="you_are_all_settled_up">You are all settled up</string>
     <string name="settled_up_text">Settled up</string>
 
-
     <string name="individual_owe_text">you owe</string>
     <string name="individual_own_text">you own</string>
 
-    <string name="group_owe_text">to group</string>
-    <string name="group_own_text">from group</string>
+    <string name="group_owe_text">To group</string>
+    <string name="group_own_text">From group</string>
 
-    <string name="home_group_own_text">from group(s)</string>
-    <string name="home_group_owe_text">to group(s)</string>
+    <string name="home_group_own_text">From group(s)</string>
+    <string name="home_group_owe_text">To group(s)</string>
 
-    <string name="home_individual_own_text">from group(s)</string>
-    <string name="home_individual_owe_text">to group(s)</string>
+    <string name="home_individual_own_text">From group(s)</string>
+    <string name="home_individual_owe_text">To group(s)</string>
     <string name="expense_list">Expense List</string>
+
 
 
 </resources>

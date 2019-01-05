@@ -90,9 +90,16 @@
             android:name=".Activities.NewGroup"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activities.GroupActivity" />
+
         <activity android:name=".Activities.PasswordSettingScreen"
             android:theme="@style/AppThemeNoActionBar"/>
+
+        <activity android:name=".Activities.AppLockScreen"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="adjustResize"/>
+
         <activity android:name=".Activities.AddExpense" />
+
         <activity
             android:name=".Activities.NotificationActivity"
             android:theme="@style/AppThemeNoActionBar" />
@@ -119,7 +126,10 @@
             android:exported="false" />
 
         <activity android:name=".Activities.ForgotPassword"
-            android:theme="@style/AppThemeNoActionBar"></activity>
+            android:theme="@style/AppThemeNoActionBar">
+
+        </activity>
+
     </application>
 
 </manifest>

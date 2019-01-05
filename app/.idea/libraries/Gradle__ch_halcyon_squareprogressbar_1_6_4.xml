@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: ch.halcyon:squareprogressbar-1.6.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/squareprogressbar-1.6.4.aar/ca70d9fab938d6798da8395948e966dd/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/squareprogressbar-1.6.4.aar/ca70d9fab938d6798da8395948e966dd/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.halcyon/squareprogressbar/1.6.4/50ae27ec61890f07a08199387fc91ff78b7b4024/squareprogressbar-1.6.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

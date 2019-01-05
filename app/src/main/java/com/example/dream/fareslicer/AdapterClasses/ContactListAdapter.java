@@ -265,7 +265,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                 @Override
                 public void onFailure(Call<CallResult> call, Throwable t) {
 
-                    Toast.makeText(mContext, "Selection Call failed", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, "Selection Call failed", Toast.LENGTH_SHORT).show();
                     Log.e("Selection", t.getMessage());
                 }
 

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.midorikocak:currency-picker-android-1.1.9">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-currency-picker-android-1.1.9.aar/bb7da2a3793897817236c6d177d8fdbd/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-currency-picker-android-1.1.9.aar/bb7da2a3793897817236c6d177d8fdbd/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

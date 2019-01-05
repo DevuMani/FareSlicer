@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/new_group_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.NewGroup">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:paddingTop="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_group_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:hint="Group Name"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingTop="5dp"-->
+            <!--android:paddingLeft="30dp"-->
+            <!--android:paddingRight="30dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:textSize="20sp"-->
+                <!--android:text="Currency:"/>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+
+                <!--<TextView-->
+                    <!--android:id="@+id/edit_profile_currency"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="set"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textSize="25sp"-->
+                    <!--android:layout_weight="3"-->
+                    <!--/>-->
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_weight="1">-->
+
+                    <!--<ImageView-->
+                        <!--android:id="@+id/edit_currency_select"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:background="@color/colorPrimary"-->
+                        <!--android:padding=".5dp"-->
+                        <!--app:srcCompat="@drawable/left_side_arrow" />-->
+
+                <!--</RelativeLayout>-->
+
+            <!--</LinearLayout>-->
+
+
+        <!--</LinearLayout>-->
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:id="@+id/edit_layout_add_members"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:textColor="#9455ED"
+                    android:text="Members"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                >
+
+                <ProgressBar
+                    android:id="@+id/edit_member_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5">
+
+                <ImageView
+                    android:id="@+id/edit_add_member"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/add_person"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/linearlayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="100dp"
+            android:padding="10dp"
+            android:layout_below="@+id/edit_layout_add_members">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/edit_group_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:elevation="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            >
+
+            <Button
+                android:id="@+id/group_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_round_curve"
+                android:layout_gravity="center"
+                android:text="Update"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

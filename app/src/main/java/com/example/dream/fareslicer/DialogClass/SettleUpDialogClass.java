@@ -10,10 +10,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,7 +56,7 @@ public class SettleUpDialogClass extends Dialog implements View.OnClickListener 
     String amount="";
     String cur_user_id="";
     String other_user_name="";
-    String currency="";
+    private String currency="";
 
     //For individual settle
     String other_user_id="";
@@ -95,6 +98,17 @@ public class SettleUpDialogClass extends Dialog implements View.OnClickListener 
 
         initView();
         init();
+
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.gravity = Gravity.CENTER;
+
+
+        getWindow().setAttributes(lp);
 
         SharedPreferences sp=context.getSharedPreferences("User",MODE_PRIVATE);
         String fileName=sp.getString("user_photo","");
@@ -171,7 +185,7 @@ public class SettleUpDialogClass extends Dialog implements View.OnClickListener 
             {
                 save.setEnabled(false);
                 settle_text.setVisibility(View.VISIBLE);
-                settle_text.setText("Amount should not be greater than "+ "$"+ actual_amount);
+                settle_text.setText("Amount should not be greater than "+ currency+" "+ actual_amount);
 
             }
             else
@@ -193,7 +207,7 @@ public class SettleUpDialogClass extends Dialog implements View.OnClickListener 
 
         if (view==save)
         {
-            Toast.makeText(context, "Share amount"+ et_amount.getText().toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "Share amount"+ et_amount.getText().toString(), Toast.LENGTH_SHORT).show();
             if (type.equalsIgnoreCase("group_member"))
             {
 
@@ -289,7 +303,7 @@ public class SettleUpDialogClass extends Dialog implements View.OnClickListener 
 
                     if (selectResult.getStatus().equalsIgnoreCase("true"))
                     {
-                        Toast.makeText(context, "Settled "+ "$"+et_amount.getText().toString()+ other_user_name, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Settled "+currency+ " "+et_amount.getText().toString()+ other_user_name, Toast.LENGTH_SHORT).show();
                     }
 
                     }catch (NullPointerException n)
